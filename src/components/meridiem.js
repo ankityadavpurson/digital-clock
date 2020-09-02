@@ -1,13 +1,14 @@
 import React from 'react';
+import { basePixcelOffColor, basePixcelOnColor } from '../constant/color';
 
 const Meridiem = () => {
   const date = new Date();
-  const meridiem = date.toLocaleString().split(' ')[2];
+  const meridiem = date.getHours() >= 12;
   return (
     <div style={{ display: 'inline-block' }}>
       <div
         style={{
-          color: meridiem === 'AM' ? 'lime' : 'rgb(75, 75, 75)',
+          color: !meridiem ? basePixcelOnColor : basePixcelOffColor,
           margin: 0,
           padding: 0,
           fontSize: 40,
@@ -18,7 +19,7 @@ const Meridiem = () => {
       </div>
       <div
         style={{
-          color: meridiem === 'PM' ? 'lime' : 'rgb(75, 75, 75)',
+          color: meridiem ? basePixcelOnColor : basePixcelOffColor,
           margin: 0,
           padding: 0,
           fontSize: 40,

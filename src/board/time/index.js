@@ -11,7 +11,7 @@ function TimeComponent() {
   useEffect(() => setTime());
 
   function setTimeState(hr, min, sec) {
-    setHour(hr - 12);
+    setHour(Math.abs(hr - 12));
     setMinute(min);
     setSecond(sec);
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { basePixcelOnColor } from '../constant/color';
 
 const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
@@ -9,7 +10,7 @@ const Day = () => {
     <div style={{ display: 'inline-block', margin: '20px' }}>
       <div
         style={{
-          color: 'lime',
+          color: basePixcelOnColor,
           margin: 0,
           padding: 0,
           fontSize: 40,

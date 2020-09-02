@@ -1,7 +1,8 @@
 import React from 'react';
+import { basePixcelOffColor, basePixcelOnColor } from '../constant/color';
 
 const Pixcel = ({ size, power }) => {
-  const color = power ? 'lime' : 'rgb(75, 75, 75)';
+  const color = power ? basePixcelOnColor : basePixcelOffColor;
   const height = size / 2;
   const width = size;
   return (

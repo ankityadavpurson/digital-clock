@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PixcelGrid from './pixcel-grid';
+import { labelColor } from '../constant/color';
 
 function FourDigitPixcelGrid({ number, label }) {
   const [oncePalce, setOncePalce] = useState(0);
@@ -32,7 +33,7 @@ function FourDigitPixcelGrid({ number, label }) {
           padding: 0,
           marginTop: -35,
           paddingLeft: 30,
-          color: '#989898',
+          color: labelColor,
           fontSize: 45,
         }}
       >
