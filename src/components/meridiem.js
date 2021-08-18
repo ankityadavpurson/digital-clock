@@ -1,14 +1,14 @@
-import React from 'react';
-import { basePixcelOffColor, basePixcelOnColor } from '../constant/color';
+import React, { useContext } from 'react';
+import { basePixelOffColor } from '../constant/color';
+import ColorContext from '../store/color-context';
 
-const Meridiem = () => {
-  const date = new Date();
-  const meridiem = date.getHours() >= 12;
+const Meridiem = ({ meridiem }) => {
+  const colorCtx = useContext(ColorContext);
   return (
     <div style={{ display: 'inline-block' }}>
       <div
         style={{
-          color: !meridiem ? basePixcelOnColor : basePixcelOffColor,
+          color: !meridiem ? colorCtx.pixelColor : basePixelOffColor,
           margin: 0,
           padding: 0,
           fontSize: 40,
@@ -19,7 +19,7 @@ const Meridiem = () => {
       </div>
       <div
         style={{
-          color: meridiem ? basePixcelOnColor : basePixcelOffColor,
+          color: meridiem ? colorCtx.pixelColor : basePixelOffColor,
           margin: 0,
           padding: 0,
           fontSize: 40,

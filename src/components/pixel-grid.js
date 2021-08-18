@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Pixcel from './pixcel';
+import Pixel from './pixel';
 
-const pixcelMemory = [
+const pixelMemory = [
   [1, 2, 3, 5, 6, 7],
   [3, 6],
   [1, 3, 4, 5, 7],
@@ -15,8 +15,8 @@ const pixcelMemory = [
   [],
 ];
 
-const PixcelGrid = ({ number }) => {
-  const [pixcels, setPixcels] = useState([]);
+const PixelGrid = ({ number }) => {
+  const [pixels, setPixels] = useState([]);
 
   useEffect(() => {
     if (number >= 0 && number <= 10) {
@@ -29,14 +29,14 @@ const PixcelGrid = ({ number }) => {
         { id: 6, power: false },
         { id: 7, power: false },
       ];
-      pix.map((pixcel) =>
-        pixcelMemory[number].forEach((p) => {
-          if (pixcel.id === p) {
-            pixcel.power = true;
+      pix.map((pixel) =>
+        pixelMemory[number].forEach((p) => {
+          if (pixel.id === p) {
+            pixel.power = true;
           }
         })
       );
-      setPixcels(pix);
+      setPixels(pix);
     } else {
       const pixError = [
         { id: 1, power: true },
@@ -47,19 +47,19 @@ const PixcelGrid = ({ number }) => {
         { id: 6, power: false },
         { id: 7, power: true },
       ];
-      setPixcels(pixError);
+      setPixels(pixError);
     }
   }, [number]);
 
   return (
     <div style={{ display: 'inline-block', margin: '20px' }}>
-      {pixcels.map((pixcel) => (
-        <div key={pixcel.id} className={`pixcel${pixcel.id}`}>
-          <Pixcel size={40} power={pixcel.power} />
+      {pixels.map((pixel) => (
+        <div key={pixel.id} className={`pixel${pixel.id}`}>
+          <Pixel size={40} power={pixel.power} />
         </div>
       ))}
     </div>
   );
 };
 
-export default PixcelGrid;
+export default PixelGrid;

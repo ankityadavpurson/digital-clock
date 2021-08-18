@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import FourDigitPixcelGrid from '../../components/four-digit-pixcel-grid';
-import TwoDigitPixcelGrid from '../../components/two-digit-pixcel-grid';
+import FourDigitPixelGrid from '../../components/four-digit-pixel-grid';
+import TwoDigitPixelGrid from '../../components/two-digit-pixel-grid';
 import Day from '../../components/day';
 
 function DateComponent() {
-  const [date, setDate] = useState(88);
-  const [month, setMonth] = useState(88);
-  const [year, setYear] = useState(8888);
+  const [date, setDate] = useState(0);
+  const [month, setMonth] = useState(0);
+  const [year, setYear] = useState(0);
+  const [day, setDay] = useState(0);
 
   useEffect(() => setDateValue());
 
-  function setDateState(yyyy, mm, dd) {
+  function setDateState(yyyy, mm, dd, dy) {
     setYear(yyyy);
     setMonth(mm);
     setDate(dd);
+    setDay(dy);
   }
 
   function setDateValue() {
@@ -22,18 +24,19 @@ function DateComponent() {
       const yr = dateValue.getFullYear();
       const mt = dateValue.getMonth() + 1;
       const dt = dateValue.getDate();
-      setDateState(yr, mt, dt);
+      const dy = dateValue.getDay();
+      setDateState(yr, mt, dt, dy);
     }, 1000);
   }
 
   return (
     <div>
-      <FourDigitPixcelGrid number={year} label="YEAR" />
+      <FourDigitPixelGrid number={year} label="YEAR" />
       <span style={{ marginLeft: '20px', marginRight: '20px' }}>
-        <TwoDigitPixcelGrid number={month} label="MONTH" />
+        <TwoDigitPixelGrid number={month} label="MONTH" />
       </span>
-      <TwoDigitPixcelGrid number={date} label="DATE" />
-      <Day />
+      <TwoDigitPixelGrid number={date} label="DATE" />
+      <Day day={day} />
     </div>
   );
 }

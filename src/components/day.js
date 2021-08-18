@@ -1,35 +1,19 @@
-import React from 'react';
-import { basePixcelOnColor } from '../constant/color';
+import React, { useContext } from 'react';
+import ColorContext from '../store/color-context';
 
 const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-const Day = () => {
-  const date = new Date();
-  const day = date.getDay();
+const Day = ({ day }) => {
+  const colorCtx = useContext(ColorContext);
+  const nextDay = day === 6 ? 0 : day + 1;
+  const prevDay = day === 0 ? 6 : day - 1;
   return (
     <div style={{ display: 'inline-block', margin: '20px' }}>
-      <div
-        style={{
-          color: basePixcelOnColor,
-          margin: 0,
-          padding: 0,
-          fontSize: 40,
-          fontWeight: 'bold',
-        }}
-      >
+      <p className={'day gradient1'}>{days[prevDay]}</p>
+      <p className={'day'} style={{ color: colorCtx.pixelColor }}>
         {days[day]}
-      </div>
-      <div
-        style={{
-          color: 'transparent',
-          margin: 0,
-          padding: 0,
-          fontSize: 40,
-          fontWeight: 'bold',
-        }}
-      >
-        {'...'}
-      </div>
+      </p>
+      <p className={'day gradient2'}>{days[nextDay]}</p>
     </div>
   );
 };

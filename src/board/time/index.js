@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import TwoDigitPixcelGrid from '../../components/two-digit-pixcel-grid';
-import ColonPixcel from '../../components/colon-pixcel';
+import TwoDigitPixelGrid from '../../components/two-digit-pixel-grid';
+import ColonPixel from '../../components/colon-pixel';
 import Meridiem from '../../components/meridiem';
 
 function TimeComponent() {
-  const [hour, setHour] = useState(88);
-  const [minute, setMinute] = useState(88);
-  const [second, setSecond] = useState(88);
+  const [hour, setHour] = useState(0);
+  const [minute, setMinute] = useState(0);
+  const [second, setSecond] = useState(0);
+  const [meridiem, setMeridiem] = useState(false);
 
   useEffect(() => setTime());
 
-  function setTimeState(hr, min, sec) {
+  function setTimeState(hr, min, sec, mdrm) {
     setHour(hr > 12 ? Math.abs(hr - 12) : hr);
     setMinute(min);
     setSecond(sec);
+    setMeridiem(mdrm);
   }
 
   function setTime() {
@@ -22,18 +24,19 @@ function TimeComponent() {
       const h = date.getHours();
       const m = date.getMinutes();
       const s = date.getSeconds();
-      setTimeState(h, m, s);
+      const md = date.getHours() >= 12;
+      setTimeState(h, m, s, md);
     }, 1000);
   }
 
   return (
     <div>
-      <Meridiem />
-      <TwoDigitPixcelGrid number={hour} label="HOUR" />
-      <ColonPixcel />
-      <TwoDigitPixcelGrid number={minute} label="MINUTE" />
-      <ColonPixcel />
-      <TwoDigitPixcelGrid number={second} label="SECOND" />
+      <Meridiem meridiem={meridiem} />
+      <TwoDigitPixelGrid number={hour} label="HOUR" />
+      <ColonPixel />
+      <TwoDigitPixelGrid number={minute} label="MINUTE" />
+      <ColonPixel />
+      <TwoDigitPixelGrid number={second} label="SECOND" />
     </div>
   );
 }
