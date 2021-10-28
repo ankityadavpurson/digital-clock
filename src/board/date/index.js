@@ -3,7 +3,7 @@ import FourDigitPixelGrid from '../../components/four-digit-pixel-grid';
 import TwoDigitPixelGrid from '../../components/two-digit-pixel-grid';
 import Day from '../../components/day';
 
-function DateComponent() {
+function DateComponent({ zoom = '100%' }) {
   const [date, setDate] = useState(0);
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(0);
@@ -30,7 +30,7 @@ function DateComponent() {
   }
 
   return (
-    <div>
+    <div style={{ zoom }}>
       <FourDigitPixelGrid number={year} label="YEAR" />
       <span style={{ marginLeft: '20px', marginRight: '20px' }}>
         <TwoDigitPixelGrid number={month} label="MONTH" />

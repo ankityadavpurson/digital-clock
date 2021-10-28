@@ -3,7 +3,7 @@ import TwoDigitPixelGrid from '../../components/two-digit-pixel-grid';
 import ColonPixel from '../../components/colon-pixel';
 import Meridiem from '../../components/meridiem';
 
-function TimeComponent() {
+function TimeComponent({ zoom = '100%' }) {
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
   const [second, setSecond] = useState(0);
@@ -30,7 +30,7 @@ function TimeComponent() {
   }
 
   return (
-    <div>
+    <div style={{ zoom }}>
       <Meridiem meridiem={meridiem} />
       <TwoDigitPixelGrid number={hour} label="HOUR" />
       <ColonPixel />

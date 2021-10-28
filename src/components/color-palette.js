@@ -10,9 +10,13 @@ const ColorPalette = () => {
   const colorCtx = useContext(ColorContext);
 
   const [show, setShow] = useState(true);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
-    showTimeout = setTimeout(() => setShow(false), 10500);
+    showTimeout = setTimeout(() => {
+      setOpen(false);
+      setShow(false);
+    }, 10500);
     return () => {
       clearTimeout(showTimeout);
     };
@@ -20,18 +24,37 @@ const ColorPalette = () => {
 
   function handleColorChange(color) {
     colorCtx.changePixelColor(color);
+    setOpen(false);
     setShow(false);
     clearTimeout(showTimeout);
   }
 
+  function handleOpenColorPalette() {
+    setOpen(true);
+  }
+
   return (
-    <div style={{ position: 'fixed', right: 0, bottom: 0 }}>
-      {show && <span className="blink_me">{`Change pixel color >>> `}</span>}
-      <span>
-        {COLORS.map((color, i) => (
-          <ColorButton key={i} color={color} onClick={handleColorChange} />
-        ))}
-      </span>
+    <div style={{ position: 'fixed', right: 8, bottom: 0 }}>
+      {!open && (
+        <span>
+          <ColorButton
+            color={colorCtx.pixelColor}
+            onClick={handleOpenColorPalette}
+          />
+        </span>
+      )}
+      {open && (
+        <>
+          {show && (
+            <span className="blink_me">{`Change pixel color >>> `}</span>
+          )}
+          <span>
+            {COLORS.map((color, i) => (
+              <ColorButton key={i} color={color} onClick={handleColorChange} />
+            ))}
+          </span>
+        </>
+      )}
     </div>
   );
 };
