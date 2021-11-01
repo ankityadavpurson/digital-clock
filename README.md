@@ -1,6 +1,6 @@
 # Digital Clock
 
-[Click here](https://digital-clock-1611.web.app/) to see the app on Heroku
+[Click here](https://digital-clock-1611.web.app/) to see the app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
