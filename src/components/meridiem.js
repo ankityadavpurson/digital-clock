@@ -7,6 +7,7 @@ const Meridiem = ({ meridiem }) => {
   return (
     <div style={{ display: 'inline-block' }}>
       <div
+        className="transition"
         style={{
           color: !meridiem ? colorCtx.pixelColor : basePixelOffColor,
           margin: 0,
@@ -18,6 +19,7 @@ const Meridiem = ({ meridiem }) => {
         {'AM'}
       </div>
       <div
+        className="transition"
         style={{
           color: meridiem ? colorCtx.pixelColor : basePixelOffColor,
           margin: 0,
@@ -29,6 +31,7 @@ const Meridiem = ({ meridiem }) => {
         {'PM'}
       </div>
       <div
+        className="transition"
         style={{
           color: 'transparent',
           margin: 0,
@@ -40,6 +43,7 @@ const Meridiem = ({ meridiem }) => {
         {'...'}
       </div>
       <div
+        className="transition"
         style={{
           color: 'transparent',
           margin: 0,

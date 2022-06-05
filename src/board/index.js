@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TimeComponent from './time';
 import DateComponent from './date';
 import ColorPalette from '../components/color-palette';
-import { useContext } from 'react';
 import ColorContext from '../store/color-context';
 
 const getWidthCent = () => {

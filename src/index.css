@@ -115,6 +115,11 @@ body {
   animation: blinker 1s linear infinite;
 }
 
+.transition {
+  -webkit-transition-duration: 0.45s;
+  transition-duration: 0.45s;
+}
+
 @keyframes blinker {
   50% {
     opacity: 0;

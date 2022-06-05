@@ -10,6 +10,7 @@ const Pixel = ({ size, power }) => {
   return (
     <div style={{ margin: '0px' }}>
       <div
+        className="transition"
         style={{
           width: '0',
           height: '0',
@@ -20,6 +21,7 @@ const Pixel = ({ size, power }) => {
         }}
       ></div>
       <div
+        className="transition"
         style={{
           height: `${height}px`,
           width: `${width}px`,
@@ -28,6 +30,7 @@ const Pixel = ({ size, power }) => {
         }}
       ></div>
       <div
+        className="transition"
         style={{
           width: '0',
           height: '0',

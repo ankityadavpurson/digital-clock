@@ -9,23 +9,22 @@ let showTimeout;
 const ColorPalette = () => {
   const colorCtx = useContext(ColorContext);
 
-  const [show, setShow] = useState(true);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    showTimeout = setTimeout(() => {
-      setOpen(false);
-      setShow(false);
-    }, 10500);
+    if (open) {
+      showTimeout = setTimeout(() => {
+        setOpen(false);
+      }, 5000);
+    }
     return () => {
       clearTimeout(showTimeout);
     };
-  }, []);
+  }, [open]);
 
   function handleColorChange(color) {
     colorCtx.changePixelColor(color);
     setOpen(false);
-    setShow(false);
     clearTimeout(showTimeout);
   }
 
@@ -44,16 +43,11 @@ const ColorPalette = () => {
         </span>
       )}
       {open && (
-        <>
-          {show && (
-            <span className="blink_me">{`Change pixel color >>> `}</span>
-          )}
-          <span>
-            {COLORS.map((color, i) => (
-              <ColorButton key={i} color={color} onClick={handleColorChange} />
-            ))}
-          </span>
-        </>
+        <span>
+          {COLORS.map((color, i) => (
+            <ColorButton key={i} color={color} onClick={handleColorChange} />
+          ))}
+        </span>
       )}
     </div>
   );

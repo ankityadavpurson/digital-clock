@@ -15,6 +15,16 @@ const pixelMemory = [
   [],
 ];
 
+const pixError = [
+  { id: 1, power: true },
+  { id: 2, power: true },
+  { id: 3, power: false },
+  { id: 4, power: true },
+  { id: 5, power: true },
+  { id: 6, power: false },
+  { id: 7, power: true },
+];
+
 const PixelGrid = ({ number }) => {
   const [pixels, setPixels] = useState([]);
 
@@ -38,15 +48,6 @@ const PixelGrid = ({ number }) => {
       );
       setPixels(pix);
     } else {
-      const pixError = [
-        { id: 1, power: true },
-        { id: 2, power: true },
-        { id: 3, power: false },
-        { id: 4, power: true },
-        { id: 5, power: true },
-        { id: 6, power: false },
-        { id: 7, power: true },
-      ];
       setPixels(pixError);
     }
   }, [number]);

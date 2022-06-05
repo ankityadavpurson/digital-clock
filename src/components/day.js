@@ -9,11 +9,11 @@ const Day = ({ day }) => {
   const prevDay = day === 0 ? 6 : day - 1;
   return (
     <div style={{ display: 'inline-block', margin: '20px' }}>
-      <p className={'day gradient1'}>{days[prevDay]}</p>
-      <p className={'day'} style={{ color: colorCtx.pixelColor }}>
+      <p className={'day gradient1 transition'}>{days[prevDay]}</p>
+      <p className={'day transition'} style={{ color: colorCtx.pixelColor }}>
         {days[day]}
       </p>
-      <p className={'day gradient2'}>{days[nextDay]}</p>
+      <p className={'day gradient2 transition'}>{days[nextDay]}</p>
     </div>
   );
 };
