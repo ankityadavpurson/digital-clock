@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Board from './board';
 import './index.css';
-import { ColorContextProvider } from './store/color-context';
+import App from './app';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ColorContextProvider>
-      <Board />
-    </ColorContextProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
