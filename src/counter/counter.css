@@ -1,0 +1,126 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dialog-color: #000000c2;
+  --dialog-font-color: #ffffff;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress {
+  width: 100vw;
+  background-color: rgb(255, 0, 0);
+  transition: 500ms linear;
+}
+
+.time-counter-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.time-counter {
+  font-size: 22vw;
+  line-height: 1;
+  word-break: break-all;
+  color: rgb(0, 255, 255);
+  mix-blend-mode: difference;
+  font-weight: 500;
+}
+
+.add-space {
+  display: none;
+  width: 46px;
+  height: 65px;
+}
+
+@media screen and (max-width: 768px) {
+  .time-counter {
+    width: 265px;
+    text-align: right;
+    font-size: 190px;
+  }
+  .add-space {
+    display: inline-block;
+  }
+}
+
+.dialog-container {
+  position: absolute;
+  width: 100%;
+  transition: 0.5s;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 9;
+  margin: auto;
+  padding-block: 16px;
+  width: 100%;
+  background: var(--dialog-color);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(6.5px);
+  -webkit-backdrop-filter: blur(6.5px);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@media screen and (min-width: 512px) {
+  .dialog {
+    max-width: 380px;
+  }
+}
+
+.selector-number {
+  width: 80px;
+  padding: 8px;
+  margin-inline: 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.selector-number label {
+  text-transform: capitalize;
+  font-weight: 500;
+  color: var(--dialog-font-color);
+}
+
+.selector-number select {
+  width: 100%;
+  font-size: 18px;
+  padding: 3px 4px 2px 4px;
+  border: 0;
+  border-bottom: 2px solid var(--dialog-font-color);
+  background-color: transparent;
+  color: var(--dialog-font-color);
+}
+.selector-number select option {
+  color: black;
+}
+
+.button {
+  background: transparent;
+  border: 0;
+  font-size: 30px;
+  margin: 8px;
+  padding: 0;
+}
