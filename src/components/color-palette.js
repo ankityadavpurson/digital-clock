@@ -3,7 +3,14 @@ import { basePixelOnColor } from '../constant/color';
 import ColorContext from '../store/color-context';
 import ColorButton from './color-button';
 
-const COLORS = ['white', 'grey', 'red', 'blue', 'yellow', basePixelOnColor];
+const COLORS = [
+  '#ffffff',
+  '#808080',
+  '#ff0000',
+  '#0000ff',
+  '#ffff00',
+  basePixelOnColor,
+];
 
 let showTimeout;
 const ColorPalette = () => {
