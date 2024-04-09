@@ -10,21 +10,25 @@ const getRandomPosition = () => ({
   left: getRandomNumber(-50, window.innerWidth),
 });
 
-const Particle = () => {
+const Particle = ({ timeout }) => {
   const colorCtx = useContext(ColorContext);
   const [position, setPosition] = useState(getRandomPosition());
 
   useEffect(() => {
-    setPosition(getRandomPosition());
-
-    let interval;
-    clearInterval(interval);
-    interval = setInterval(() => setPosition(getRandomPosition()), 10000);
+    let timeoutNode;
+    let intervalNode;
+    clearTimeout(timeoutNode);
+    clearInterval(intervalNode);
+    timeoutNode = setTimeout(() => {
+      setPosition(getRandomPosition());
+      intervalNode = setInterval(() => setPosition(getRandomPosition()), 10000);
+    }, timeout * 1000);
 
     return () => {
-      clearInterval(interval);
+      clearTimeout(timeoutNode);
+      clearInterval(intervalNode);
     };
-  }, []);
+  }, [timeout]);
 
   return (
     <div

@@ -29,6 +29,9 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
 
   return (
     <div>
+      {Array.from({ length: 16 }, (_, i) => i).map((num) => (
+        <Particle key={`Particle-${num}`} timeout={num} />
+      ))}
       <div className="board">
         {date && <DateComponent zoom={width} />}
         {time && <TimeComponent zoom={width} />}
@@ -37,9 +40,6 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
       <a href="/counter" title="Time Counter" className="back-btn counter-link">
         <span className="blink_me">🕔</span>
       </a>
-      {Array.from({ length: 16 }, (_, i) => i).map((num) => (
-        <Particle key={`Particle-${num}`} />
-      ))}
     </div>
   );
 }
