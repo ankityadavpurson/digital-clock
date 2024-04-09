@@ -5,6 +5,7 @@ import ColorPalette from '../components/color-palette';
 import ColorContext from '../store/color-context';
 import './board.css';
 import Particle from './Particle';
+import AnimatedClock from '../components/animated clock';
 
 const getWidthCent = () => {
   return `${((document.body.clientWidth / window.screen.width) * 100).toFixed(
@@ -38,7 +39,7 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
       </div>
       {palette && <ColorPalette />}
       <a href="/counter" title="Time Counter" className="back-btn counter-link">
-        <span className="blink_me">🕔</span>
+        <AnimatedClock />
       </a>
     </div>
   );
