@@ -80,12 +80,20 @@ const Counter = () => {
     return d.toLocaleString('en-GB').split(' ')[1];
   }
 
+  const SingleDigit = ({ num }) => (
+    <div className="single-digit">
+      <span className="digital-number" style={{ color: '#80808080' }}>
+        8
+      </span>
+      <span className="digital-number">{num}</span>
+    </div>
+  );
+
   const Numbers = ({ num, colon }) => (
-    <div>
-      <span className="digital-number">{num.split('')[0]}</span>
-      <span className="digital-number">{num.split('')[1]}</span>
-      {colon && <span>:</span>}
-      {!colon && <span className="add-space" />}
+    <div style={{ display: 'flex' }}>
+      <SingleDigit num={num.split('')[0]} />
+      <SingleDigit num={num.split('')[1]} />
+      {colon ? <span>:</span> : <span style={{ color: 'transparent' }}>:</span>}
     </div>
   );
 

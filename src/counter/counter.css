@@ -42,11 +42,19 @@
   font-family: 'digital-font';
 }
 
-.digital-number {
+.single-digit {
+  position: relative;
+  display: inline-block;
   width: 10vw;
+}
+
+.digital-number {
   display: inline-block;
   text-align: right;
   line-height: 1;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .digital-number-container {
@@ -63,8 +71,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .single-digit {
+    width: 96px;
+  }
   .digital-number {
-    width: 88px;
     text-align: right;
   }
   .digital-number-container {
