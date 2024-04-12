@@ -80,16 +80,28 @@ const Counter = () => {
     return d.toLocaleString('en-GB').split(' ')[1];
   }
 
+  const Numbers = ({ num, colon }) => (
+    <div>
+      <span className="digital-number">{num.split('')[0]}</span>
+      <span className="digital-number">{num.split('')[1]}</span>
+      {colon && <span>:</span>}
+      {!colon && <span className="add-space" />}
+    </div>
+  );
+
+  const [hh, mm, ss] = HHMMSS(seconds).split(':');
+
   return (
     <div className="container">
       <a href="/" title="Digital Clock" className="back-btn">
         ⬅
       </a>
       <div className="time-counter-container">
-        <p className="time-counter">
-          {`${HHMMSS(seconds)}`}
-          <span className="add-space" />
-        </p>
+        <div className="digital-number-container digital-font">
+          <Numbers num={hh} colon />
+          <Numbers num={mm} colon />
+          <Numbers num={ss} />
+        </div>
       </div>
       <div
         className="progress"
