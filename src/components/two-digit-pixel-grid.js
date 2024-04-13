@@ -27,6 +27,8 @@ function TwoDigitPixelGrid({ number, label }) {
           paddingLeft: 30,
           color: labelColor,
           fontSize: 45,
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         {label}

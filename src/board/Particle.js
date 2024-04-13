@@ -6,8 +6,8 @@ function getRandomNumber(min, max) {
 }
 
 const getRandomPosition = () => ({
-  top: getRandomNumber(-50, window.innerHeight),
-  left: getRandomNumber(-50, window.innerWidth),
+  top: getRandomNumber(50, window.innerHeight - 100),
+  left: getRandomNumber(50, window.innerWidth - 100),
 });
 
 const Particle = ({ timeout }) => {

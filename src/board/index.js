@@ -8,7 +8,7 @@ import Particle from './Particle';
 import AnimatedClock from '../components/animated clock';
 
 const getWidthCent = () => {
-  return `${((document.body.clientWidth / window.screen.width) * 100).toFixed(
+  return `${((document.body.clientWidth / 1200) * 100).toFixed(
     0
   )}%`;
 };
