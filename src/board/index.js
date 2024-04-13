@@ -26,15 +26,29 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
     if (color) colorCtx.changePixelColor(color);
   }, [color, colorCtx]);
 
+  const [openSite, setOpenSite] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setOpenSite(true), 1000);
+  }, []);
+
   return (
     <div>
       <ToggleParticles />
-      <div className="board">
+      <div
+        className="board"
+        style={{ display: openSite ? 'table-cell' : 'none' }}
+      >
         {date && <DateComponent zoom={width} />}
         {time && <TimeComponent zoom={width} />}
       </div>
       {palette && <ColorPalette />}
-      <a href="/counter" title="Time Counter" className="back-btn counter-link">
+      <a
+        href="/counter"
+        title="Time Counter"
+        className={`back-btn transition ${
+          openSite ? 'counter-link' : 'counter-link-center'
+        }`}
+      >
         <AnimatedClock />
       </a>
     </div>
