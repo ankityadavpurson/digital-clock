@@ -89,12 +89,22 @@ const Counter = () => {
     </div>
   );
 
-  const Numbers = ({ num, colon }) => (
-    <div style={{ display: 'flex' }}>
-      <SingleDigit num={num.split('')[0]} />
-      <SingleDigit num={num.split('')[1]} />
-      {colon ? <span>:</span> : <span style={{ color: 'transparent' }}>:</span>}
-    </div>
+  const TrNumbers = ({ num, colon }) => (
+    <tr>
+      <td>
+        <SingleDigit num={num.split('')[0]} />
+      </td>
+      <td>
+        <SingleDigit num={num.split('')[1]} />
+      </td>
+      <td>
+        {colon ? (
+          <span>:</span>
+        ) : (
+          <span style={{ color: 'transparent' }}>:</span>
+        )}
+      </td>
+    </tr>
   );
 
   const [hh, mm, ss] = HHMMSS(seconds).split(':');
@@ -105,11 +115,11 @@ const Counter = () => {
         ⬅
       </a>
       <div className="time-counter-container">
-        <div className="digital-number-container digital-font">
-          <Numbers num={hh} colon />
-          <Numbers num={mm} colon />
-          <Numbers num={ss} />
-        </div>
+        <table border={0} className="digital-number-container digital-font">
+          <TrNumbers num={hh} colon />
+          <TrNumbers num={mm} colon />
+          <TrNumbers num={ss} />
+        </table>
       </div>
       <div
         className="progress"
