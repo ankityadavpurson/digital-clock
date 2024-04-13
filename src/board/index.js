@@ -3,14 +3,12 @@ import TimeComponent from './time';
 import DateComponent from './date';
 import ColorPalette from '../components/color-palette';
 import ColorContext from '../store/color-context';
-import './board.css';
-import Particle from './Particle';
 import AnimatedClock from '../components/animated clock';
+import ToggleParticles from '../components/toggle-particles';
+import './board.css';
 
 const getWidthCent = () => {
-  return `${((document.body.clientWidth / 1200) * 100).toFixed(
-    0
-  )}%`;
+  return `${((document.body.clientWidth / 1200) * 100).toFixed(0)}%`;
 };
 
 function Board({ date = true, time = true, palette = true, color = '' }) {
@@ -30,9 +28,7 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
 
   return (
     <div>
-      {Array.from({ length: 16 }, (_, i) => i).map((num) => (
-        <Particle key={`Particle-${num}`} timeout={num} />
-      ))}
+      <ToggleParticles />
       <div className="board">
         {date && <DateComponent zoom={width} />}
         {time && <TimeComponent zoom={width} />}
