@@ -43,13 +43,20 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
       </div>
       {palette && <ColorPalette />}
       <a
-        href="/counter"
+        href={!openSite ? '/#' : '/counter'}
         title="Time Counter"
         className={`back-btn transition ${
           openSite ? 'counter-link' : 'counter-link-center'
         }`}
       >
         <AnimatedClock />
+      </a>
+      <a
+        href="/radar-clock"
+        title="Radar Clock"
+        className="back-btn radar-clock-link"
+      >
+        <div className="radar-clock-icon" />
       </a>
     </div>
   );
