@@ -1,5 +1,6 @@
 import React from 'react';
 import AnimatedClock from './animated clock';
+import RadarClockIcon from './radar-clock-icon';
 
 const ClockOptions = () => {
   return (
@@ -12,7 +13,7 @@ const ClockOptions = () => {
         title="Radar Clock"
         className="back-btn radar-clock-link"
       >
-        <div className="radar-clock-icon" />
+        <RadarClockIcon />
       </a>
     </>
   );
