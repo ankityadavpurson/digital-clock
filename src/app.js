@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 
 import { ColorContextProvider } from './store/color-context';
-import Board from './board';
-import Counter from './counter';
-import RadarClock from './radar';
-// Add lazyload
+import ScreenLoader from './components/screen-loader';
 
 import './index.css';
+
+const Board = lazy(() => import('./board'));
+const Counter = lazy(() => import('./counter'));
+const RadarClock = lazy(() => import('./radar'));
 
 const App = () => {
   const [screen, setScreen] = useState('');
@@ -29,9 +30,21 @@ const App = () => {
 
   return (
     <ColorContextProvider>
-      {screen === 'digital-clock' && <Board />}
-      {screen === 'counter' && <Counter />}
-      {screen === 'radar-clock' && <RadarClock />}
+      {screen === 'digital-clock' && (
+        <Suspense fallback={<ScreenLoader />}>
+          <Board />
+        </Suspense>
+      )}
+      {screen === 'counter' && (
+        <Suspense fallback={<ScreenLoader />}>
+          <Counter />
+        </Suspense>
+      )}
+      {screen === 'radar-clock' && (
+        <Suspense fallback={<ScreenLoader />}>
+          <RadarClock />
+        </Suspense>
+      )}
     </ColorContextProvider>
   );
 };

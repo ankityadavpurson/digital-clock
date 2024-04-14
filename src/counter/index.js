@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import SelectTime from './SelectTime';
+import BackButton from '../components/back-button';
+
 import './counter.css';
 
 let interval, intervalh;
@@ -111,14 +113,14 @@ const Counter = () => {
 
   return (
     <div className="container">
-      <a href="/" title="Digital Clock" className="back-btn">
-        ⬅
-      </a>
+      <BackButton />
       <div className="time-counter-container">
-        <table border={0} className="digital-number-container digital-font">
-          <TrNumbers num={hh} colon />
-          <TrNumbers num={mm} colon />
-          <TrNumbers num={ss} />
+        <table border={0}>
+          <tbody className="digital-number-container digital-font">
+            <TrNumbers num={hh} colon />
+            <TrNumbers num={mm} colon />
+            <TrNumbers num={ss} />
+          </tbody>
         </table>
       </div>
       <div

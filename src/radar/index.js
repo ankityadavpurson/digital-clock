@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import BackButton from '../components/back-button';
+
 import './radar.css';
 
 const RadarClock = () => {
@@ -39,9 +41,7 @@ const RadarClock = () => {
 
   return (
     <div className="body-container">
-      <a href="/" title="Digital Clock" className="back-btn">
-        ⬅
-      </a>
+      <BackButton />
       <div className="radar-container flex-center relative">
         <div className="hour-rim flex-center absolute">
           <div className="relative hour-container">

@@ -49,7 +49,7 @@ const ToggleParticles = () => {
             }}
           />
         </div>
-        <input hidden type="checkbox" checked={showParticle} />
+        <input hidden type="checkbox" defaultValue={showParticle} />
       </button>
     </>
   );

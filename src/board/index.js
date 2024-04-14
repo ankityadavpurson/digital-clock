@@ -3,8 +3,9 @@ import TimeComponent from './time';
 import DateComponent from './date';
 import ColorPalette from '../components/color-palette';
 import ColorContext from '../store/color-context';
-import AnimatedClock from '../components/animated clock';
 import ToggleParticles from '../components/toggle-particles';
+import ClockOptions from '../components/clock-options';
+
 import './board.css';
 
 const getWidthCent = () => {
@@ -26,38 +27,15 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
     if (color) colorCtx.changePixelColor(color);
   }, [color, colorCtx]);
 
-  const [openSite, setOpenSite] = useState(false);
-  useEffect(() => {
-    setTimeout(() => setOpenSite(true), 1000);
-  }, []);
-
   return (
     <div>
       <ToggleParticles />
-      <div
-        className="board"
-        style={{ display: openSite ? 'table-cell' : 'none' }}
-      >
+      <div className="board">
         {date && <DateComponent zoom={width} />}
         {time && <TimeComponent zoom={width} />}
       </div>
       {palette && <ColorPalette />}
-      <a
-        href={!openSite ? '/#' : '/counter'}
-        title="Time Counter"
-        className={`back-btn transition ${
-          openSite ? 'counter-link' : 'counter-link-center'
-        }`}
-      >
-        <AnimatedClock />
-      </a>
-      <a
-        href="/radar-clock"
-        title="Radar Clock"
-        className="back-btn radar-clock-link"
-      >
-        <div className="radar-clock-icon" />
-      </a>
+      <ClockOptions />
     </div>
   );
 }
