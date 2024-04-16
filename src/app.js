@@ -8,6 +8,7 @@ import './index.css';
 const Board = lazy(() => import('./board'));
 const Counter = lazy(() => import('./counter'));
 const RadarClock = lazy(() => import('./radar'));
+const Speedo = lazy(() => import('./speedo'));
 
 const App = () => {
   const [screen, setScreen] = useState('');
@@ -20,6 +21,9 @@ const App = () => {
         break;
       case '/radar-clock':
         setScreen('radar-clock');
+        break;
+      case '/speedo':
+        setScreen('speedo');
         break;
       default:
         setScreen('digital-clock');
@@ -43,6 +47,11 @@ const App = () => {
       {screen === 'radar-clock' && (
         <Suspense fallback={<ScreenLoader />}>
           <RadarClock />
+        </Suspense>
+      )}
+      {screen === 'speedo' && (
+        <Suspense fallback={<ScreenLoader />}>
+          <Speedo />
         </Suspense>
       )}
     </ColorContextProvider>

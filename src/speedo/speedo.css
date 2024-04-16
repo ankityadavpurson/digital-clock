@@ -1,0 +1,10 @@
+.speedo-container {
+  color: white;
+  margin: 10px;
+  text-align: left;
+}
+
+.speedo-container td {
+  padding-inline: 5px;
+  text-transform: capitalize;
+}
