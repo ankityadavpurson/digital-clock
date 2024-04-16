@@ -19,7 +19,7 @@
   justify-content: center;
   align-items: center;
   overflow: visible;
-  transform: scale(0.45);
+  transform: scale(0.43);
 }
 
 @media screen and (min-width: 430px) {
@@ -87,11 +87,35 @@
   transform: translate(-50%, 11%);
 }
 
+.second-hand-view {
+  width: 60px;
+  height: 390px;
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 68, 0.20) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
 .minute-point {
   height: 8px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 1900%);
+  transform: translate(-50%, 1700%);
+}
+
+.minute-point-value {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--bordercolor);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 2550%);
 }
 
 .minute-point img {
@@ -102,7 +126,19 @@
   height: 9.5px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 3100%);
+  transform: translate(-50%, 3000%);
+}
+
+.hour-point-value {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--bordercolor);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 3950%);
 }
 
 .hour-point img {
@@ -272,9 +308,13 @@
 }
 
 .logo {
+  width: 78px;
+  height: 78px;
   font-size: 50px;
   font-weight: bold;
   color: var(--bordercolor);
+  background-color: var(--bgcolor);
+  border-radius: 50%;
 }
 
 .minutes-line {

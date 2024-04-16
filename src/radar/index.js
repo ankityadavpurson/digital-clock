@@ -3,21 +3,22 @@ import BackButton from '../components/back-button';
 
 import './radar.css';
 
+let minHrInterval, secInterval;
 const RadarClock = () => {
   useEffect(() => {
-    setInterval(() => {
+    function setSec() {
+      const second = new Date().getSeconds();
+      const ms = new Date().getMilliseconds();
+      secondHand(second + ms / 1000);
+    }
+
+    function setMinHr() {
       const second = new Date().getSeconds();
       const minute = new Date().getMinutes();
       const hour = new Date().getHours();
       minuteHand(minute + second / 60);
       hourHand(hour + minute / 60 + second / 3600);
-    }, 1000);
-
-    setInterval(() => {
-      const second = new Date().getSeconds();
-      const ms = new Date().getMilliseconds();
-      secondHand(second + ms / 1000);
-    }, 100);
+    }
 
     function secondHand(second) {
       const deg = second * 6 - 180;
@@ -37,6 +38,17 @@ const RadarClock = () => {
       const hourPoint = document.getElementsByClassName('hour-point-rim')[0];
       if (hourPoint) hourPoint.style.transform = `rotate(${deg}deg)`;
     }
+
+    setMinHr();
+    setSec();
+
+    minHrInterval = setInterval(() => setMinHr(), 1000);
+    secInterval = setInterval(() => setSec(), 100);
+
+    return () => {
+      clearInterval(minHrInterval);
+      clearInterval(secInterval);
+    };
   }, []);
 
   return (
@@ -101,13 +113,16 @@ const RadarClock = () => {
           </div>
         </div>
         <div className="innermost-rim relative">
-          <div className="second-hand absolute"></div>
+          <div className="second-hand absolute">
+            <div className="second-hand-view"></div>
+          </div>
         </div>
-        <div className="logo absolute">X</div>
+        <div className="logo absolute flex-center">X</div>
         <div className="minute-point-rim absolute">
           <div className="minute-point absolute">
             <img src="fighter-jet.svg" alt="fighter-minute" height="80" />
           </div>
+          <div className="minute-point-value" />
         </div>
         <div className="hour-point-rim absolute">
           <div className="hour-point absolute">
@@ -118,6 +133,7 @@ const RadarClock = () => {
               width="200"
             />
           </div>
+          <div className="hour-point-value" />
         </div>
       </div>
     </div>
