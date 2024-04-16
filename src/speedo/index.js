@@ -7,11 +7,15 @@ const Speedo = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setInterval(() => {
-      navigator.geolocation.getCurrentPosition(showPosition, shohError, {
-        enableHighAccuracy: true,
-      });
-    }, 1000);
+    const watchId = navigator.geolocation.watchPosition(
+      showPosition,
+      shohError,
+      { enableHighAccuracy: true }
+    );
+
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+    };
   }, []);
 
   function showPosition(_position) {
