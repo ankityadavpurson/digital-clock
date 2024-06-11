@@ -3,32 +3,35 @@ import React, { useEffect, useState } from 'react';
 import './speedo.css';
 
 const Speedo = () => {
-  const [position, setPosition] = useState({
-    coords: {
-      accuracy: 1017.7767666318387,
-      heading: 73,
-      latitude: 12.845056,
-      longitude: 77.6667136,
-      speed: 1.94,
-    },
-    timestamp: 1717950677416,
-  });
+  const [speedNiddle, setSpeedNiddle] = useState(0);
+
+  const [position, setPosition] = useState(null);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   const watchId = navigator.geolocation.watchPosition(
-  //     showPosition,
-  //     shohError,
-  //     { enableHighAccuracy: true }
-  //   );
+  useEffect(() => {
+    setTimeout(() => setSpeedNiddle(120), 400);
+    setTimeout(() => setSpeedNiddle(0), 990);
 
-  //   return () => {
-  //     navigator.geolocation.clearWatch(watchId);
-  //   };
-  // }, []);
+    const watchId = navigator.geolocation.watchPosition(
+      showPosition,
+      shohError,
+      { enableHighAccuracy: true }
+    );
+
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const normalise = (num) => {
+    if (!num) return 0;
+    return Math.round(num);
+  };
 
   function showPosition(_position) {
     setPosition(_position);
+    setSpeedNiddle(normalise(_position.coords.speed));
   }
 
   function shohError(_error) {
@@ -36,21 +39,41 @@ const Speedo = () => {
     setError(_error.message);
   }
 
-  const normalise = (num) => {
-    if (!num) return 0;
-    return Math.round(num);
-  };
+  function scaleValue(input) {
+    if (input < 0) return 0;
+    if (input > 120) return 76.5;
+    const inputRange = 120;
+    const outputRange = 153;
+    const scaleFactor = outputRange / inputRange;
+    const scaledValue = input * scaleFactor - 76.5;
+    return scaledValue;
+  }
 
   return (
     <div className="speedo-container">
       {position ? (
-        <div>
+        <div style={{ width: 420 }}>
           <div className="speed-meter-container border">
             <div className="speed-meter-numbers-container">
-              <div className="speed-meter-numbers-arc" />
-              <div className="speed-meter-numbers-1" />
+              <div className="speed-meter-numbers-arc">
+                <div className="numbers-line meter-numbers-1" />
+                <div className="numbers-line meter-numbers-2" />
+                <div className="numbers-line meter-numbers-3" />
+                <div className="numbers-line meter-numbers-4" />
+                <div className="numbers-line meter-numbers-5" />
+                <div className="numbers-line meter-numbers-6" />
+                <div className="numbers-line meter-numbers-7" />
+                <div className="numbers-line meter-numbers-8" />
+                <div className="numbers-line meter-numbers-9" />
+                <div className="hide-number-lines" />
+              </div>
             </div>
-            <div className="speed-meter-niddle-container">
+            <div
+              className="speed-meter-niddle-container"
+              style={{
+                transform: `rotate(${scaleValue(speedNiddle)}deg)`,
+              }}
+            >
               <div className="speed-meter-niddle" />
               <div className="speed-meter-niddle-cover" />
             </div>

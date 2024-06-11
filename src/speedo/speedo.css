@@ -7,6 +7,12 @@
   font-family: 'digital-font';
 }
 
+/* center the div in body */
+body {
+  display: flex;
+  justify-content: center;
+}
+
 .speedo-container {
   color: white;
 }
@@ -33,22 +39,78 @@
 }
 
 .speed-meter-numbers-container {
-  /* background-color: brown; */
+  width: 100%;
 }
 
 .speed-meter-numbers-arc {
+  position: relative;
   border-radius: 50%;
   height: 400px;
   border: 3px solid white;
-  /* background-color: gray; */
+  overflow: hidden;
+}
+
+.numbers-line {
+  position: absolute;
+  height: 420px;
+  border: 2px solid white;
+  left: 50%;
+  top: 0%;
+}
+
+.hide-number-lines {
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+  height: 350px;
+  width: 350px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.meter-numbers-1 {
+  transform: rotate(0deg);
+}
+
+.meter-numbers-2 {
+  transform: rotate(18deg);
+}
+
+.meter-numbers-3 {
+  transform: rotate(36deg);
+}
+
+.meter-numbers-4 {
+  transform: rotate(54deg);
+}
+
+.meter-numbers-5 {
+  transform: rotate(72deg);
+}
+
+.meter-numbers-6 {
+  transform: rotate(342deg);
+}
+
+.meter-numbers-7 {
+  transform: rotate(324deg);
+}
+
+.meter-numbers-8 {
+  transform: rotate(306deg);
+}
+
+.meter-numbers-9 {
+  transform: rotate(288deg);
 }
 
 .speed-meter-niddle-container {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: rotate(20deg);
   border: 1px solid white;
+  transition: all 0.6s ease-in-out;
 }
 
 .speed-meter-niddle {
