@@ -2,7 +2,7 @@ import React from 'react';
 import AnimatedClock from './animated clock';
 import RadarClockIcon from './radar-clock-icon';
 
-const ClockOptions = () => {
+const ClockNavigation = () => {
   return (
     <>
       <a href="/counter" title="Time Counter" className="back-btn counter-link">
@@ -15,8 +15,11 @@ const ClockOptions = () => {
       >
         <RadarClockIcon />
       </a>
+      <a href="/speedo" title="Speed Meter" className="back-btn speedo-link">
+        🧭
+      </a>
     </>
   );
 };
 
-export default ClockOptions;
+export default ClockNavigation;

@@ -4,7 +4,7 @@ import DateComponent from './date';
 import ColorPalette from '../components/color-palette';
 import ColorContext from '../store/color-context';
 import ToggleParticles from '../components/toggle-particles';
-import ClockOptions from '../components/clock-options';
+import ClockNavigation from '../components/clock-navigation';
 
 import './board.css';
 
@@ -35,7 +35,7 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
         {time && <TimeComponent zoom={width} />}
       </div>
       {palette && <ColorPalette />}
-      <ClockOptions />
+      <ClockNavigation />
     </div>
   );
 }

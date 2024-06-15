@@ -50,6 +50,13 @@ body {
   left: auto;
 }
 
+.speedo-link {
+  right: 120px;
+  top: 0;
+  left: auto;
+  padding-top: 5px;
+}
+
 .radar-clock-icon {
   width: 24px;
   height: 24px;

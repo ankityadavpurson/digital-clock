@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import './speedo.css';
+import BackButton from '../components/back-button';
 
 const Speedo = () => {
   const [speedNiddle, setSpeedNiddle] = useState(0);
@@ -72,6 +73,7 @@ const Speedo = () => {
 
   return (
     <>
+      <BackButton />
       <div className="speedo-container">
         <div className="sub-speedo-container flex-center">
           {position && (
