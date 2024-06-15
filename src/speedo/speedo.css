@@ -15,7 +15,6 @@ body {
 
 .speedo-container {
   color: white;
-  margin-top: 36px;
 }
 
 .sub-speedo-container {
@@ -138,18 +137,18 @@ body {
 }
 
 .lt-lg-container {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 600;
   position: absolute;
-  transform: translate(25%, 50%);
+  transform: translate(45%, 50%);
 }
 
 .lt-lg {
-  margin: 16px;
+  margin: 14px;
 }
 
 .direction-container {
-  margin-top: 100px;
+  margin-top: 65px;
 }
 
 .compass-container {
@@ -172,7 +171,6 @@ body {
 
 .campass-niddle {
   margin: 16px;
-  transition: all 0.6s ease-in-out;
 }
 
 .point-center {
@@ -211,9 +209,9 @@ body {
 }
 
 .east {
-  right: 10px;
+  right: 0;
 }
 
 .west {
-  left: 0;
+  left: 10px;
 }
