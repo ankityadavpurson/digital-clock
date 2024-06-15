@@ -4,13 +4,33 @@ import './speedo.css';
 
 const Speedo = () => {
   const [speedNiddle, setSpeedNiddle] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   const [position, setPosition] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => setSpeedNiddle(120), 400);
-    setTimeout(() => setSpeedNiddle(0), 990);
+    setTimeout(() => {
+      setSpeedNiddle(120);
+      setDirection(359);
+    }, 400);
+    setTimeout(() => {
+      setSpeedNiddle(0);
+      setDirection(0);
+    }, 990);
+
+    // setPosition({
+    //   coords: {
+    //     accuracy: 1017.7767666318387,
+    //     altitude: 12,
+    //     altitudeAccuracy: 1,
+    //     heading: 120,
+    //     latitude: 12.845056,
+    //     longitude: 77.6667136,
+    //     speed: 1.96,
+    //   },
+    //   timestamp: 1718453589038,
+    // });
 
     const watchId = navigator.geolocation.watchPosition(
       showPosition,
@@ -21,8 +41,13 @@ const Speedo = () => {
     return () => {
       navigator.geolocation.clearWatch(watchId);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const normaliseToFixed = (num) => {
+    if (!num) return 0;
+    return num.toFixed(3);
+  };
 
   const normalise = (num) => {
     if (!num) return 0;
@@ -31,7 +56,8 @@ const Speedo = () => {
 
   function showPosition(_position) {
     setPosition(_position);
-    setSpeedNiddle(normalise(_position.coords.speed));
+    setSpeedNiddle(normalise(_position.coords.speed) * 3.6);
+    setDirection(normalise(_position.coords.heading));
   }
 
   function shohError(_error) {
@@ -41,19 +67,20 @@ const Speedo = () => {
 
   function scaleValue(input) {
     if (input < 0) return 0;
-    if (input > 120) return 76.5;
-    const inputRange = 120;
-    const outputRange = 153;
+    if (input > 120) return 76;
+    const inputRange = 121;
+    const outputRange = 154;
     const scaleFactor = outputRange / inputRange;
-    const scaledValue = input * scaleFactor - 76.5;
+    const scaledValue = input * scaleFactor - 76;
     return scaledValue;
   }
 
   return (
     <div className="speedo-container">
       {position ? (
-        <div style={{ width: 420 }}>
-          <div className="speed-meter-container border">
+        <div className="sub-speedo-container flex-center">
+          <div>{direction}</div>
+          <div className="speed-meter-container" style={{ width: 500 }}>
             <div className="speed-meter-numbers-container">
               <div className="speed-meter-numbers-arc">
                 <div className="numbers-line meter-numbers-1" />
@@ -65,7 +92,10 @@ const Speedo = () => {
                 <div className="numbers-line meter-numbers-7" />
                 <div className="numbers-line meter-numbers-8" />
                 <div className="numbers-line meter-numbers-9" />
-                <div className="hide-number-lines" />
+                <div className="hide-number-lines">
+                  <div className="digital-font speed-number">{speedNiddle}</div>
+                  <div style={{ marginBlock: 15 }}>km/h</div>
+                </div>
               </div>
             </div>
             <div
@@ -77,53 +107,35 @@ const Speedo = () => {
               <div className="speed-meter-niddle" />
               <div className="speed-meter-niddle-cover" />
             </div>
-          </div>
-          <div className="border flex-center">
             <div className="lt-lg-container flex-center">
               <div className="lt-lg">
-                LT {normalise(position.coords.latitude)}
+                LT {normaliseToFixed(position.coords.latitude)}
               </div>
               <div className="lt-lg">
-                LG {normalise(position.coords.longitude)}
+                LG {normaliseToFixed(position.coords.longitude)}
               </div>
             </div>
+          </div>
+          <div className="direction-container" style={{ width: 500 }}>
             <div className="compass-container flex-center">
-              <div className="campass-niddle">^</div>
-              <div className="campass-niddle">North</div>
+              <div className="point north">N</div>
+              <div className="point south">S</div>
+              <div className="point west">W</div>
+              <div className="point east">E</div>
+              <div className="campass-niddle-container flex-center">
+                <div
+                  className="campass-niddle"
+                  style={{ transform: `rotate(${direction}deg)` }}
+                >
+                  <div className="campass-niddle-red" />
+                  <div className="campass-niddle-white" />
+                </div>
+              </div>
+              <div className="point-center" />
             </div>
           </div>
         </div>
       ) : (
-        // <table>
-        //   <tbody>
-        //     <tr>
-        //       <td>Timestamp</td>
-        //       <td>{position.timestamp ? position.timestamp : 0}</td>
-        //     </tr>
-        //     <tr>
-        //       <td>Accuracy</td>
-        //       <td>{position.coords.accuracy ? position.coords.accuracy : 0}</td>
-        //     </tr>
-        //     <tr>
-        //       <td>heading</td>
-        //       <td>{position.coords.heading ? position.coords.heading : 0}</td>
-        //     </tr>
-        //     <tr>
-        //       <td>latitude</td>
-        //       <td>{position.coords.latitude ? position.coords.latitude : 0}</td>
-        //     </tr>
-        //     <tr>
-        //       <td>longitude</td>
-        //       <td>
-        //         {position.coords.longitude ? position.coords.longitude : 0}
-        //       </td>
-        //     </tr>
-        //     <tr>
-        //       <td>speed</td>
-        //       <td>{position.coords.speed ? position.coords.speed : 0}</td>
-        //     </tr>
-        //   </tbody>
-        // </table>
         <div style={{ color: 'red' }}>Error: {error}</div>
       )}
     </div>
