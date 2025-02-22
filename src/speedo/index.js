@@ -147,7 +147,7 @@ const Speedo = () => {
           )}
         </div>
       </div>
-      {error && <div style={{ color: 'red' }}>Error: {error}</div>}
+      {error && <div className="speedo-error-container">Error: {error}</div>}
     </>
   );
 };
