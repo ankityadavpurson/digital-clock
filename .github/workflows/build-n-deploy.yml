@@ -27,7 +27,6 @@ jobs:
       - name: 🚀 Stage Deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{secrets.GITHUB_TOKEN}}'
-          firebaseServiceAccount: '${{secrets.FIREBASE_SERVICE_ACCOUNT_MYSITE_DEVELOPMENT}}'
-          channelId: live
+          repoToken: ${{secrets.GITHUB_TOKEN}}
+          firebaseServiceAccount: ${{secrets.FIREBASE_SERVICE_ACCOUNT_DIGITAL_CLOCK_1611}}
           projectId: digital-clock-1611
