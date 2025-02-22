@@ -25,7 +25,7 @@ const AnimatedClock = () => {
     intervalNode = setInterval(() => {
       if (handNum === HANDS.length) handNum = 0;
       setClock(handNum++);
-    }, 1000);
+    }, 500);
 
     return () => {
       clearInterval(intervalNode);

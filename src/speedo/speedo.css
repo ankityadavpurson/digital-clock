@@ -215,3 +215,12 @@ body {
 .west {
   left: 10px;
 }
+
+.loading-container {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.animated-clock-container {
+  font-size: 80px;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import './speedo.css';
 import BackButton from '../components/back-button';
+import AnimatedClock from '../components/animated-clock';
 
 const Speedo = () => {
   const [speedNiddle, setSpeedNiddle] = useState(0);
@@ -77,63 +78,73 @@ const Speedo = () => {
       <div className="speedo-container">
         <div className="sub-speedo-container flex-center">
           {position && (
-            <div className="speed-meter-container" style={{ width: 500 }}>
-              <div className="speed-meter-numbers-container">
-                <div className="speed-meter-numbers-arc">
-                  <div className="numbers-line meter-numbers-1" />
-                  <div className="numbers-line meter-numbers-2" />
-                  <div className="numbers-line meter-numbers-3" />
-                  <div className="numbers-line meter-numbers-4" />
-                  <div className="numbers-line meter-numbers-5" />
-                  <div className="numbers-line meter-numbers-6" />
-                  <div className="numbers-line meter-numbers-7" />
-                  <div className="numbers-line meter-numbers-8" />
-                  <div className="numbers-line meter-numbers-9" />
-                  <div className="hide-number-lines">
-                    <div className="digital-font speed-number">
-                      {speedNiddle.toFixed(2)}
+            <>
+              <div className="speed-meter-container" style={{ width: 500 }}>
+                <div className="speed-meter-numbers-container">
+                  <div className="speed-meter-numbers-arc">
+                    <div className="numbers-line meter-numbers-1" />
+                    <div className="numbers-line meter-numbers-2" />
+                    <div className="numbers-line meter-numbers-3" />
+                    <div className="numbers-line meter-numbers-4" />
+                    <div className="numbers-line meter-numbers-5" />
+                    <div className="numbers-line meter-numbers-6" />
+                    <div className="numbers-line meter-numbers-7" />
+                    <div className="numbers-line meter-numbers-8" />
+                    <div className="numbers-line meter-numbers-9" />
+                    <div className="hide-number-lines">
+                      <div className="digital-font speed-number">
+                        {speedNiddle.toFixed(2)}
+                      </div>
+                      <div style={{ marginBlock: 15 }}>km/h</div>
                     </div>
-                    <div style={{ marginBlock: 15 }}>km/h</div>
+                  </div>
+                </div>
+                <div
+                  className="speed-meter-niddle-container"
+                  style={{
+                    transform: `rotate(${scaleValue(speedNiddle)}deg)`,
+                  }}
+                >
+                  <div className="speed-meter-niddle" />
+                  <div className="speed-meter-niddle-cover" />
+                </div>
+                <div className="lt-lg-container flex-center">
+                  <div className="lt-lg">
+                    LT {normaliseToFixed(position.coords.latitude)}
+                  </div>
+                  <div className="lt-lg">
+                    LG {normaliseToFixed(position.coords.longitude)}
                   </div>
                 </div>
               </div>
-              <div
-                className="speed-meter-niddle-container"
-                style={{
-                  transform: `rotate(${scaleValue(speedNiddle)}deg)`,
-                }}
-              >
-                <div className="speed-meter-niddle" />
-                <div className="speed-meter-niddle-cover" />
+              <div className="direction-container" style={{ width: 500 }}>
+                <div className="compass-container flex-center">
+                  <div className="point north">N</div>
+                  <div className="point south">S</div>
+                  <div className="point west">E</div>
+                  <div className="point east">W</div>
+                  <div className="campass-niddle-container flex-center">
+                    <div
+                      className="campass-niddle"
+                      style={{ transform: `rotate(${direction}deg)` }}
+                    >
+                      <div className="campass-niddle-red" />
+                      <div className="campass-niddle-white" />
+                    </div>
+                  </div>
+                  <div className="point-center" />
+                </div>
               </div>
-              <div className="lt-lg-container flex-center">
-                <div className="lt-lg">
-                  LT {normaliseToFixed(position.coords.latitude)}
-                </div>
-                <div className="lt-lg">
-                  LG {normaliseToFixed(position.coords.longitude)}
-                </div>
+            </>
+          )}
+          {!position && !error && (
+            <div className="loading-container">
+              <div>Waiting for GPS signal...</div>
+              <div className="animated-clock-container">
+                <AnimatedClock />
               </div>
             </div>
           )}
-          <div className="direction-container" style={{ width: 500 }}>
-            <div className="compass-container flex-center">
-              <div className="point north">N</div>
-              <div className="point south">S</div>
-              <div className="point west">E</div>
-              <div className="point east">W</div>
-              <div className="campass-niddle-container flex-center">
-                <div
-                  className="campass-niddle"
-                  style={{ transform: `rotate(${direction}deg)` }}
-                >
-                  <div className="campass-niddle-red" />
-                  <div className="campass-niddle-white" />
-                </div>
-              </div>
-              <div className="point-center" />
-            </div>
-          </div>
         </div>
       </div>
       {error && <div style={{ color: 'red' }}>Error: {error}</div>}

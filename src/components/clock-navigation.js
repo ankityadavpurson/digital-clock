@@ -1,5 +1,5 @@
 import React from 'react';
-import AnimatedClock from './animated clock';
+import AnimatedClock from './animated-clock';
 import RadarClockIcon from './radar-clock-icon';
 
 const ClockNavigation = () => {

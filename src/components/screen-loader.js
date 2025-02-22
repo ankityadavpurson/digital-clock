@@ -1,5 +1,5 @@
 import React from 'react';
-import AnimatedClock from './animated clock';
+import AnimatedClock from './animated-clock';
 
 const ScreenLoader = () => {
   return (
