@@ -32,7 +32,7 @@ function DateComponent({ zoom = '100%' }) {
   return (
     <div style={{ zoom }}>
       <FourDigitPixelGrid number={year} label="YEAR" />
-      <span style={{ marginLeft: '20px', marginRight: '20px' }}>
+      <span style={{ marginInline: '20px' }}>
         <TwoDigitPixelGrid number={month} label="MONTH" />
       </span>
       <TwoDigitPixelGrid number={date} label="DATE" />

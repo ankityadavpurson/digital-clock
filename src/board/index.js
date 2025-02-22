@@ -3,12 +3,13 @@ import TimeComponent from './time';
 import DateComponent from './date';
 import ColorPalette from '../components/color-palette';
 import ColorContext from '../store/color-context';
+import ToggleParticles from '../components/toggle-particles';
+import ClockNavigation from '../components/clock-navigation';
+
 import './board.css';
 
 const getWidthCent = () => {
-  return `${((document.body.clientWidth / window.screen.width) * 100).toFixed(
-    0
-  )}%`;
+  return `${((document.body.clientWidth / 1200) * 100).toFixed(0)}%`;
 };
 
 function Board({ date = true, time = true, palette = true, color = '' }) {
@@ -28,18 +29,13 @@ function Board({ date = true, time = true, palette = true, color = '' }) {
 
   return (
     <div>
+      <ToggleParticles />
       <div className="board">
         {date && <DateComponent zoom={width} />}
         {time && <TimeComponent zoom={width} />}
       </div>
       {palette && <ColorPalette />}
-      <a
-        href="/counter"
-        title="Time Counter"
-        className="back-btn counter-link"
-      >
-        <span className="blink_me">🕔</span>
-      </a>
+      <ClockNavigation />
     </div>
   );
 }

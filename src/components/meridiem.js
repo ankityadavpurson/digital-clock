@@ -14,6 +14,8 @@ const Meridiem = ({ meridiem }) => {
           padding: 0,
           fontSize: 40,
           fontWeight: 'bold',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         {'AM'}
@@ -26,6 +28,8 @@ const Meridiem = ({ meridiem }) => {
           padding: 0,
           fontSize: 40,
           fontWeight: 'bold',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         {'PM'}

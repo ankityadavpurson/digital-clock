@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 const NumberGenerator = ({ label, length, value, onSelect }) => (
   <div className="selector-number">
@@ -10,7 +10,7 @@ const NumberGenerator = ({ label, length, value, onSelect }) => (
       onChange={(e) => onSelect(e.target.value)}
     >
       {getTimeNumber(length).map((num) => (
-        <option key={crypto.randomUUID()} value={num}>
+        <option key={num + 1} value={num}>
           {num}
         </option>
       ))}
@@ -45,9 +45,9 @@ const SelectTime = ({
       }, 5000);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener('mousemove', handleMouseMove);
       clearTimeout(timeoutId);
     };
   }, []);
@@ -55,15 +55,15 @@ const SelectTime = ({
   const handleUpdateTime = (hands, timeNumber) => {
     let _time = 0;
     const _timeNumber = parseInt(timeNumber);
-    if (hands === "hours") {
+    if (hands === 'hours') {
       setTime((st) => ({ ...st, hh: _timeNumber }));
       _time = _timeNumber * 60 * 60 + time.mm * 60 + time.ss;
     }
-    if (hands === "minutes") {
+    if (hands === 'minutes') {
       setTime((st) => ({ ...st, mm: _timeNumber }));
       _time = time.hh * 60 * 60 + _timeNumber * 60 + time.ss;
     }
-    if (hands === "seconds") {
+    if (hands === 'seconds') {
       setTime((st) => ({ ...st, ss: _timeNumber }));
       _time = time.hh * 60 * 60 + time.mm * 60 + _timeNumber;
     }
@@ -83,7 +83,7 @@ const SelectTime = ({
             <>
               <button
                 className="button"
-                title={stoped ? "Resume" : "Pause"}
+                title={stoped ? 'Resume' : 'Pause'}
                 onClick={stoped ? onResume : onPause}
               >
                 {stoped ? <span>▶️</span> : <span>⏸️</span>}
@@ -97,7 +97,7 @@ const SelectTime = ({
           )}
           <button
             className="button"
-            title={ticStarted ? "Restart" : "Start"}
+            title={ticStarted ? 'Restart' : 'Start'}
             onClick={onStart}
           >
             {ticStarted ? <span>🔄</span> : <span>▶️</span>}
@@ -108,24 +108,24 @@ const SelectTime = ({
             </button>
           )}
         </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <NumberGenerator
             label="hours"
             length={24}
             value={time.hh}
-            onSelect={(value) => handleUpdateTime("hours", value)}
+            onSelect={(value) => handleUpdateTime('hours', value)}
           />
           <NumberGenerator
             label="minutes"
             length={60}
             value={time.mm}
-            onSelect={(value) => handleUpdateTime("minutes", value)}
+            onSelect={(value) => handleUpdateTime('minutes', value)}
           />
           <NumberGenerator
             label="seconds"
             length={60}
             value={time.ss}
-            onSelect={(value) => handleUpdateTime("seconds", value)}
+            onSelect={(value) => handleUpdateTime('seconds', value)}
           />
         </div>
       </div>

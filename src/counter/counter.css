@@ -33,26 +33,53 @@
   flex-direction: column;
 }
 
-.time-counter {
-  font-size: 22vw;
+@font-face {
+  font-family: 'digital-font';
+  src: url('../../public/digital-7.ttf');
+}
+
+.digital-font {
+  font-family: 'digital-font';
+}
+
+.single-digit {
+  position: relative;
+  display: inline-block;
+  width: 10vw;
+}
+
+.digital-number {
+  display: inline-block;
+  text-align: right;
   line-height: 1;
-  word-break: break-all;
+  position: absolute;
+  bottom: -30px;
+  right: 0;
+}
+
+.digital-number-container {
+  display: flex;
   color: rgb(0, 255, 255);
   mix-blend-mode: difference;
-  font-weight: 500;
+  font-size: 22vw;
 }
 
 .add-space {
   display: none;
-  width: 46px;
+  width: 33px;
   height: 65px;
 }
 
 @media screen and (max-width: 768px) {
-  .time-counter {
-    width: 265px;
+  .single-digit {
+    width: 96px;
+  }
+  .digital-number {
     text-align: right;
-    font-size: 190px;
+  }
+  .digital-number-container {
+    display: block;
+    font-size: 200px;
   }
   .add-space {
     display: inline-block;
@@ -113,6 +140,7 @@
   background-color: transparent;
   color: var(--dialog-font-color);
 }
+
 .selector-number select option {
   color: black;
 }
@@ -122,5 +150,10 @@
   border: 0;
   font-size: 30px;
   margin: 8px;
+  padding: 0;
+}
+
+td {
+  display: inline-block;
   padding: 0;
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import SelectTime from './SelectTime';
+import BackButton from '../components/back-button';
+
 import './counter.css';
 
 let interval, intervalh;
@@ -80,16 +82,46 @@ const Counter = () => {
     return d.toLocaleString('en-GB').split(' ')[1];
   }
 
+  const SingleDigit = ({ num }) => (
+    <div className="single-digit">
+      <span className="digital-number" style={{ color: '#80808080' }}>
+        8
+      </span>
+      <span className="digital-number">{num}</span>
+    </div>
+  );
+
+  const TrNumbers = ({ num, colon }) => (
+    <tr>
+      <td>
+        <SingleDigit num={num.split('')[0]} />
+      </td>
+      <td>
+        <SingleDigit num={num.split('')[1]} />
+      </td>
+      <td>
+        {colon ? (
+          <span>:</span>
+        ) : (
+          <span style={{ color: 'transparent' }}>:</span>
+        )}
+      </td>
+    </tr>
+  );
+
+  const [hh, mm, ss] = HHMMSS(seconds).split(':');
+
   return (
     <div className="container">
-      <a href="/" title="Digital Clock" className="back-btn">
-        ⬅
-      </a>
+      <BackButton />
       <div className="time-counter-container">
-        <p className="time-counter">
-          {`${HHMMSS(seconds)}`}
-          <span className="add-space" />
-        </p>
+        <table border={0}>
+          <tbody className="digital-number-container digital-font">
+            <TrNumbers num={hh} colon />
+            <TrNumbers num={mm} colon />
+            <TrNumbers num={ss} />
+          </tbody>
+        </table>
       </div>
       <div
         className="progress"
