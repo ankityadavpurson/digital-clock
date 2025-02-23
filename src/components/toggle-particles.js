@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import ColorContext from '../store/color-context';
-import Particle from '../board/Particle';
+import Particle from '../screens/board/Particle';
 
 const ToggleParticles = () => {
   const colorCtx = useContext(ColorContext);

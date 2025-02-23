@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SelectTime from './SelectTime';
-import BackButton from '../components/back-button';
+import BackButton from '../../components/back-button';
 
 import './counter.css';
 

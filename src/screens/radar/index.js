@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import BackButton from '../components/back-button';
+import BackButton from '../../components/back-button';
 
 import './radar.css';
 

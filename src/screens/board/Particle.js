@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ColorContext from '../store/color-context';
+import ColorContext from '../../store/color-context';
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

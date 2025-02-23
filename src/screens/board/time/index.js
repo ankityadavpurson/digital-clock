@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import TwoDigitPixelGrid from '../../components/two-digit-pixel-grid';
-import ColonPixel from '../../components/colon-pixel';
-import Meridiem from '../../components/meridiem';
+import TwoDigitPixelGrid from '../../../components/two-digit-pixel-grid';
+import ColonPixel from '../../../components/colon-pixel';
+import Meridiem from '../../../components/meridiem';
 
 function TimeComponent({ zoom = '100%' }) {
   const [hour, setHour] = useState(0);

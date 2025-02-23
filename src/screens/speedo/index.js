@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import './speedo.css';
-import BackButton from '../components/back-button';
-import AnimatedClock from '../components/animated-clock';
+import BackButton from '../../components/back-button';
+import AnimatedClock from '../../components/animated-clock';
 
 const Speedo = () => {
   const [speedNiddle, setSpeedNiddle] = useState(0);

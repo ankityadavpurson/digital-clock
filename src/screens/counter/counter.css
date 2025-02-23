@@ -35,7 +35,7 @@
 
 @font-face {
   font-family: 'digital-font';
-  src: url('../../public/digital-7.ttf');
+  src: url('../../../public/digital-7.ttf');
 }
 
 .digital-font {

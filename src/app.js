@@ -5,17 +5,16 @@ import ScreenLoader from './components/screen-loader';
 
 import './index.css';
 
-const Board = lazy(() => import('./board'));
-const Counter = lazy(() => import('./counter'));
-const RadarClock = lazy(() => import('./radar'));
-const Speedo = lazy(() => import('./speedo'));
+const Board = lazy(() => import('./screens/board'));
+const Counter = lazy(() => import('./screens/counter'));
+const RadarClock = lazy(() => import('./screens/radar'));
+const Speedo = lazy(() => import('./screens/speedo'));
 
 const App = () => {
   const [screen, setScreen] = useState('');
 
   useEffect(() => {
-    const { pathname } = window.location;
-    switch (pathname) {
+    switch (window.location.pathname) {
       case '/counter':
         setScreen('counter');
         break;
@@ -29,7 +28,6 @@ const App = () => {
         setScreen('digital-clock');
         break;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

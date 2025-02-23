@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import TimeComponent from './time';
 import DateComponent from './date';
-import ColorPalette from '../components/color-palette';
-import ColorContext from '../store/color-context';
-import ToggleParticles from '../components/toggle-particles';
-import ClockNavigation from '../components/clock-navigation';
+import ColorPalette from '../../components/color-palette';
+import ColorContext from '../../store/color-context';
+import ToggleParticles from '../../components/toggle-particles';
+import ClockNavigation from '../../components/clock-navigation';
 
 import './board.css';
 

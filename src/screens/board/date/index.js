@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import FourDigitPixelGrid from '../../components/four-digit-pixel-grid';
-import TwoDigitPixelGrid from '../../components/two-digit-pixel-grid';
-import Day from '../../components/day';
+import FourDigitPixelGrid from '../../../components/four-digit-pixel-grid';
+import TwoDigitPixelGrid from '../../../components/two-digit-pixel-grid';
+import Day from '../../../components/day';
 
 function DateComponent({ zoom = '100%' }) {
   const [date, setDate] = useState(0);
