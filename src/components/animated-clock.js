@@ -15,7 +15,7 @@ const HANDS = [
   <span>🕚</span>,
 ];
 
-const AnimatedClock = () => {
+const AnimatedClock = (props) => {
   const [clock, setClock] = useState(0);
 
   useEffect(() => {
@@ -25,12 +25,12 @@ const AnimatedClock = () => {
     intervalNode = setInterval(() => {
       if (handNum === HANDS.length) handNum = 0;
       setClock(handNum++);
-    }, 500);
+    }, props.dialspeed || 500);
 
     return () => {
       clearInterval(intervalNode);
     };
-  }, []);
+  }, [props.dialspeed]);
 
   return HANDS[clock];
 };

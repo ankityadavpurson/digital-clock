@@ -1,0 +1,50 @@
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-wrap: wrap;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.not-found-row {
+  display: flex;
+}
+
+.not-found-clock {
+  opacity: 0.2;
+  font-size: 72px;
+}
+
+.not-found-clock:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.not-found-clock a {
+  text-decoration: none;
+}
+
+.not-found-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 0;
+}
+
+.not-found-content h1 {
+  font-size: 80px;
+}
+
+.not-found-content h2 {
+  font-size: 50px;
+}
+
+.not-found-content p {
+  font-size: 20px;
+}

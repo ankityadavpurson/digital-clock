@@ -4,6 +4,7 @@ import { ColorContextProvider } from './store/color-context';
 import ScreenLoader from './components/screen-loader';
 
 import './index.css';
+import NotFoundClock from './screens/not-found';
 
 const Board = lazy(() => import('./screens/board'));
 const Counter = lazy(() => import('./screens/counter'));
@@ -24,14 +25,22 @@ const App = () => {
       case '/speedo':
         setScreen('speedo');
         break;
-      default:
+      case '/':
         setScreen('digital-clock');
+        break;
+      default:
+        setScreen('not-found');
         break;
     }
   }, []);
 
   return (
     <ColorContextProvider>
+      {screen === 'not-found' && (
+        <Suspense fallback={<ScreenLoader />}>
+          <NotFoundClock />
+        </Suspense>
+      )}
       {screen === 'digital-clock' && (
         <Suspense fallback={<ScreenLoader />}>
           <Board />
