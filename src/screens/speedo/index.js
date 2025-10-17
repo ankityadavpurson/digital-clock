@@ -11,6 +11,7 @@ const getNIddleColor = (speed) => {
 
 const Speedo = () => {
   const [speedNiddle, setSpeedNiddle] = useState(0);
+  const [maxSpeed, setMaxSpeed] = useState(0);
   const [direction, setDirection] = useState(0);
   const [distance, setDistance] = useState(0);
 
@@ -75,6 +76,10 @@ const Speedo = () => {
   function showPosition(_position) {
     setPosition(_position);
     setSpeedNiddle(normalise(_position.coords.speed * 3.6));
+    setMaxSpeed((prevMaxSpeed) => {
+      const currentSpeed = normalise(_position.coords.speed * 3.6);
+      return currentSpeed > prevMaxSpeed ? currentSpeed : prevMaxSpeed;
+    });
   }
 
   function showError(_error) {
@@ -110,9 +115,16 @@ const Speedo = () => {
                       <div className="digital-font speed-number">
                         {distance.toFixed(2)}
                       </div>
-                      <div style={{marginTop:8}}>km</div>
+                      <div style={{ marginTop: 8 }}>km</div>
                     </div>
                   </div>
+                </div>
+                <div
+                  className="speed-meter-niddle-container"
+                  style={{ transform: `rotate(${scaleValue(maxSpeed)}deg)` }}
+                >
+                  <div className="max-speed-meter-niddle" />
+                  <div className="speed-meter-niddle-cover" />
                 </div>
                 <div
                   className="speed-meter-niddle-container"
