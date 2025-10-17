@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import AnimatedClock from '../../components/animated-clock';
 import BackButton from '../../components/back-button';
 import './speedo.css';
@@ -12,6 +12,7 @@ const getNIddleColor = (speed) => {
 const Speedo = () => {
   const [speedNiddle, setSpeedNiddle] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [distance, setDistance] = useState(0);
 
   const [position, setPosition] = useState(null);
   const [error, setError] = useState(null);
@@ -23,7 +24,7 @@ const Speedo = () => {
 
     const watchId = navigator.geolocation.watchPosition(
       showPosition,
-      shohError,
+      showError,
       { enableHighAccuracy: true }
     );
 
@@ -48,6 +49,19 @@ const Speedo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const calculateDistance = useCallback((speed) => {
+    if (speed === 0) return;
+    setDistance((prevDistance) => prevDistance + speed / 3600);
+  }, []);
+
+  useEffect(() => {
+    const distanceInterval = setInterval(() => {
+      calculateDistance(speedNiddle);
+    }, 1000);
+
+    return () => clearInterval(distanceInterval);
+  }, [calculateDistance, speedNiddle]);
+
   const normaliseToFixed = (num) => {
     if (!num) return 0;
     return num.toFixed(3);
@@ -63,7 +77,7 @@ const Speedo = () => {
     setSpeedNiddle(normalise(_position.coords.speed * 3.6));
   }
 
-  function shohError(_error) {
+  function showError(_error) {
     setPosition(null);
     setError(_error.message);
   }
@@ -92,7 +106,12 @@ const Speedo = () => {
                 <div className="speed-meter-numbers-container">
                   <div className="speed-meter-numbers-arc">
                     <NumberLines speed={speedNiddle} />
-                    <div className="hide-number-lines" />
+                    <div className="hide-number-lines">
+                      <div className="digital-font speed-number">
+                        {distance.toFixed(2)}
+                      </div>
+                      <div style={{marginTop:8}}>km</div>
+                    </div>
                   </div>
                 </div>
                 <div
