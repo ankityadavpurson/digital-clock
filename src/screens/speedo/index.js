@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
-
-import './speedo.css';
-import BackButton from '../../components/back-button';
+import { useEffect, useState } from 'react';
 import AnimatedClock from '../../components/animated-clock';
+import BackButton from '../../components/back-button';
+import './speedo.css';
+
+const getNIddleColor = (speed) => {
+  if (speed > 50) return '#ff4a4a';
+  if (speed > 40) return '#ffcf4f';
+  return 'white';
+};
 
 const Speedo = () => {
   const [speedNiddle, setSpeedNiddle] = useState(0);
@@ -10,6 +15,7 @@ const Speedo = () => {
 
   const [position, setPosition] = useState(null);
   const [error, setError] = useState(null);
+  const [showCampass, setShowCampass] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setSpeedNiddle(120), 400);
@@ -54,7 +60,7 @@ const Speedo = () => {
 
   function showPosition(_position) {
     setPosition(_position);
-    setSpeedNiddle(normalise(_position.coords.speed) * 3.6);
+    setSpeedNiddle(normalise(_position.coords.speed * 3.6));
   }
 
   function shohError(_error) {
@@ -79,61 +85,69 @@ const Speedo = () => {
         <div className="sub-speedo-container flex-center">
           {position && (
             <>
-              <div className="speed-meter-container" style={{ width: 500 }}>
+              <div
+                className="speed-meter-container"
+                style={{ width: '100vw', color: getNIddleColor(speedNiddle) }}
+              >
                 <div className="speed-meter-numbers-container">
                   <div className="speed-meter-numbers-arc">
-                    <div className="numbers-line meter-numbers-1" />
-                    <div className="numbers-line meter-numbers-2" />
-                    <div className="numbers-line meter-numbers-3" />
-                    <div className="numbers-line meter-numbers-4" />
-                    <div className="numbers-line meter-numbers-5" />
-                    <div className="numbers-line meter-numbers-6" />
-                    <div className="numbers-line meter-numbers-7" />
-                    <div className="numbers-line meter-numbers-8" />
-                    <div className="numbers-line meter-numbers-9" />
-                    <div className="hide-number-lines">
-                      <div className="digital-font speed-number">
-                        {speedNiddle.toFixed(2)}
-                      </div>
-                      <div style={{ marginBlock: 15 }}>km/h</div>
-                    </div>
+                    <NumberLines speed={speedNiddle} />
+                    <div className="hide-number-lines" />
                   </div>
                 </div>
                 <div
                   className="speed-meter-niddle-container"
-                  style={{
-                    transform: `rotate(${scaleValue(speedNiddle)}deg)`,
-                  }}
+                  style={{ transform: `rotate(${scaleValue(speedNiddle)}deg)` }}
                 >
-                  <div className="speed-meter-niddle" />
+                  <div
+                    className="speed-meter-niddle"
+                    style={{ backgroundColor: getNIddleColor(speedNiddle) }}
+                  />
                   <div className="speed-meter-niddle-cover" />
                 </div>
-                <div className="lt-lg-container flex-center">
-                  <div className="lt-lg">
-                    LT {normaliseToFixed(position.coords.latitude)}
-                  </div>
-                  <div className="lt-lg">
-                    LG {normaliseToFixed(position.coords.longitude)}
-                  </div>
+                <div className="digital-font speed-meter-niddle-cover-number">
+                  {speedNiddle}
                 </div>
+                <div className="speed-meter-niddle-cover-number-unit">kmph</div>
               </div>
-              <div className="direction-container" style={{ width: 500 }}>
-                <div className="compass-container flex-center">
-                  <div className="point north">N</div>
-                  <div className="point south">S</div>
-                  <div className="point west">E</div>
-                  <div className="point east">W</div>
-                  <div className="campass-niddle-container flex-center">
-                    <div
-                      className="campass-niddle"
-                      style={{ transform: `rotate(${direction}deg)` }}
-                    >
-                      <div className="campass-niddle-red" />
-                      <div className="campass-niddle-white" />
+              <div
+                className="direction-container"
+                style={{ width: '100vw', marginTop: 40 }}
+              >
+                <button
+                  className="toggle-compass-button"
+                  onClick={() => setShowCampass(!showCampass)}
+                >
+                  {showCampass ? 'Hide Compass' : 'Show Compass'}
+                </button>
+                {showCampass && (
+                  <>
+                    <div className="lt-lg-container flex-center">
+                      <div className="lt-lg">
+                        LT {normaliseToFixed(position.coords.latitude)}
+                      </div>
+                      <div className="lt-lg">
+                        LG {normaliseToFixed(position.coords.longitude)}
+                      </div>
                     </div>
-                  </div>
-                  <div className="point-center" />
-                </div>
+                    <div className="compass-container flex-center">
+                      <div className="point north">N</div>
+                      <div className="point south">S</div>
+                      <div className="point west">E</div>
+                      <div className="point east">W</div>
+                      <div className="campass-niddle-container flex-center">
+                        <div
+                          className="campass-niddle"
+                          style={{ transform: `rotate(${direction}deg)` }}
+                        >
+                          <div className="campass-niddle-red" />
+                          <div className="campass-niddle-white" />
+                        </div>
+                      </div>
+                      <div className="point-center" />
+                    </div>
+                  </>
+                )}
               </div>
             </>
           )}
@@ -153,3 +167,15 @@ const Speedo = () => {
 };
 
 export default Speedo;
+
+const NumberLines = ({ speed }) => {
+  const lines = 9;
+
+  return Array.from({ length: lines }, (_, i) => (
+    <div
+      key={`number-line-${i + 1}`}
+      className={`numbers-line meter-numbers-${i + 1}`}
+      style={{ borderColor: getNIddleColor(speed) }}
+    />
+  ));
+};

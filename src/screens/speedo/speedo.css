@@ -11,10 +11,12 @@ body {
   margin-top: 24px;
   display: flex;
   justify-content: center;
+  overflow: scroll;
 }
 
 .speedo-container {
   color: white;
+  margin-top: 35px;
 }
 
 .sub-speedo-container {
@@ -56,7 +58,8 @@ body {
   position: absolute;
   background-color: rgb(31, 31, 31);
   height: 350px;
-  width: 350px;
+  width: calc(100vw - 40px);
+  max-width: 350px;
   border-radius: 50%;
   top: 50%;
   left: 50%;
@@ -65,7 +68,7 @@ body {
 
 .speed-number {
   font-size: 50px;
-  margin-top: 50px;
+  margin-right: 8px;
 }
 
 .meter-numbers-1 {
@@ -125,9 +128,9 @@ body {
 }
 
 .speed-meter-niddle-cover {
-  width: 60px;
-  height: 60px;
-  background-color: rgb(204, 204, 204);
+  width: 90px;
+  height: 90px;
+  background-color: rgb(31 31 31);
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -136,11 +139,28 @@ body {
   box-shadow: 0px -12px 12px 5px rgb(31 31 31 / 50%);
 }
 
+.speed-meter-niddle-cover-number {
+  margin: auto;
+  font-size: 50px;
+  font-weight: 600;
+  margin-top: -32px;
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+}
+
+.speed-meter-niddle-cover-number-unit {
+  margin: auto;
+  font-weight: 600;
+  margin-top: 12px;
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+}
+
 .lt-lg-container {
   font-size: 24px;
   font-weight: 600;
-  position: absolute;
-  transform: translate(45%, 50%);
 }
 
 .lt-lg {
@@ -152,7 +172,6 @@ body {
 }
 
 .compass-container {
-  margin-top: 24px;
   width: 280px;
   height: 290px;
   position: relative;
@@ -229,4 +248,15 @@ body {
   margin-top: 100px;
   text-align: center;
   color: red;
+}
+
+.toggle-compass-button {
+  margin-top: 24px;
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
