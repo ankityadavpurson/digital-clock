@@ -1,10 +1,9 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
-
-import { ColorContextProvider } from './store/color-context';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import ScreenLoader from './components/screen-loader';
-
+import pathToScreenMap from './constant/router';
 import './index.css';
 import NotFoundClock from './screens/not-found';
+import { ColorContextProvider } from './store/color-context';
 
 const Board = lazy(() => import('./screens/board'));
 const Counter = lazy(() => import('./screens/counter'));
@@ -15,52 +14,29 @@ const App = () => {
   const [screen, setScreen] = useState('');
 
   useEffect(() => {
-    switch (window.location.pathname) {
-      case '/counter':
-        setScreen('counter');
-        break;
-      case '/radar-clock':
-        setScreen('radar-clock');
-        break;
-      case '/speedo':
-        setScreen('speedo');
-        break;
-      case '/':
-        setScreen('digital-clock');
-        break;
-      default:
-        setScreen('not-found');
-        break;
-    }
+    setScreen(pathToScreenMap[window.location.pathname] || 'not-found');
   }, []);
+
+  const renderScreen = () => {
+    switch (screen) {
+      case 'not-found':
+        return <NotFoundClock />;
+      case 'digital-clock':
+        return <Board />;
+      case 'counter':
+        return <Counter />;
+      case 'radar-clock':
+        return <RadarClock />;
+      case 'speedo':
+        return <Speedo />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <ColorContextProvider>
-      {screen === 'not-found' && (
-        <Suspense fallback={<ScreenLoader />}>
-          <NotFoundClock />
-        </Suspense>
-      )}
-      {screen === 'digital-clock' && (
-        <Suspense fallback={<ScreenLoader />}>
-          <Board />
-        </Suspense>
-      )}
-      {screen === 'counter' && (
-        <Suspense fallback={<ScreenLoader />}>
-          <Counter />
-        </Suspense>
-      )}
-      {screen === 'radar-clock' && (
-        <Suspense fallback={<ScreenLoader />}>
-          <RadarClock />
-        </Suspense>
-      )}
-      {screen === 'speedo' && (
-        <Suspense fallback={<ScreenLoader />}>
-          <Speedo />
-        </Suspense>
-      )}
+      <Suspense fallback={<ScreenLoader />}>{renderScreen()}</Suspense>
     </ColorContextProvider>
   );
 };
