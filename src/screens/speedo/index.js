@@ -20,7 +20,7 @@ const Speedo = () => {
   const [showCampass, setShowCampass] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setSpeedNiddle(120), 400);
+    setTimeout(() => setSpeedNiddle(100), 400);
     setTimeout(() => setSpeedNiddle(0), 990);
 
     const watchId = navigator.geolocation.watchPosition(
@@ -87,16 +87,6 @@ const Speedo = () => {
     setError(_error.message);
   }
 
-  function scaleValue(input) {
-    if (input < 0) return 0;
-    if (input > 120) return 76;
-    const inputRange = 121;
-    const outputRange = 154;
-    const scaleFactor = outputRange / inputRange;
-    const scaledValue = input * scaleFactor - 76;
-    return scaledValue;
-  }
-
   return (
     <>
       <BackButton />
@@ -105,41 +95,169 @@ const Speedo = () => {
           {position && (
             <>
               <div
-                className="speed-meter-container"
-                style={{ width: '100vw', color: getNIddleColor(speedNiddle) }}
+                style={{
+                  position: 'relative',
+                  width: '280px',
+                  height: '280px',
+                  margin: '0 auto',
+                  scale: '1.5',
+                }}
               >
-                <div className="speed-meter-numbers-container">
-                  <div className="speed-meter-numbers-arc">
-                    <NumberLines speed={speedNiddle} />
-                    <div className="hide-number-lines">
-                      <div className="digital-font speed-number">
-                        {distance.toFixed(2)}
-                      </div>
-                      <div style={{ marginTop: 8 }}>km</div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="speed-meter-niddle-container"
-                  style={{ transform: `rotate(${scaleValue(maxSpeed)}deg)` }}
+                <svg
+                  width="280"
+                  height="280"
+                  style={{ position: 'absolute', top: 0, left: 0 }}
                 >
-                  <div className="max-speed-meter-niddle" />
-                  <div className="speed-meter-niddle-cover" />
-                </div>
+                  {/* Background Circle */}
+                  <circle cx="140" cy="140" r="130" fill="#1f1f1f" />
+
+                  {/* Speed Marks - Simple white ticks */}
+                  {Array.from({ length: 9 }).map((_, i) => {
+                    const angle = -180 + i * 22.5;
+                    const rad = (angle * Math.PI) / 180;
+                    const x1 = 140 + 105 * Math.cos(rad);
+                    const y1 = 140 + 105 * Math.sin(rad);
+                    const x2 = 140 + 120 * Math.cos(rad);
+                    const y2 = 140 + 120 * Math.sin(rad);
+
+                    return (
+                      <line
+                        key={i}
+                        x1={x1}
+                        y1={y1}
+                        x2={x2}
+                        y2={y2}
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        stroke={getNIddleColor(speedNiddle)}
+                        style={{ transition: 'transform 0.5s ease' }}
+                      />
+                    );
+                  })}
+
+                  {/* Needle with gradient */}
+                  <defs>
+                    <linearGradient
+                      id="needleGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop
+                        offset="0%"
+                        style={{
+                          stopColor: getNIddleColor(speedNiddle),
+                          stopOpacity: 1,
+                        }}
+                      />
+                      <stop
+                        offset="100%"
+                        style={{
+                          stopColor: `${getNIddleColor(speedNiddle)}80`,
+                          stopOpacity: 1,
+                        }}
+                      />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Needle with gradient */}
+                  <defs>
+                    <linearGradient
+                      id="maxNeedleGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop
+                        offset="0%"
+                        style={{ stopColor: '#ffffff4b', stopOpacity: 1 }}
+                      />
+                      <stop
+                        offset="100%"
+                        style={{ stopColor: '#000000ff', stopOpacity: 1 }}
+                      />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Needle shape */}
+                  <g
+                    style={{
+                      transition: 'transform 0.5s ease',
+                      transformOrigin: '140px 140px',
+                      transform: `rotate(${
+                        -180 + (Math.min(speedNiddle, 100) / 100) * 180
+                      }deg)`,
+                    }}
+                  >
+                    <polygon
+                      points="140,140 135,145 240,140 135,135"
+                      fill="url(#needleGradient)"
+                      style={{
+                        filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
+                      }}
+                    />
+                  </g>
+
+                  {/* Max Needle shape */}
+                  <g
+                    style={{
+                      transition: 'transform 0.5s ease',
+                      transformOrigin: '140px 140px',
+                      transform: `rotate(${
+                        -180 + (Math.min(maxSpeed, 200) / 200) * 180
+                      }deg)`,
+                    }}
+                  >
+                    <polygon
+                      points="140,140 135,145 240,140 135,135"
+                      fill="url(#maxNeedleGradient)"
+                      style={{
+                        filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
+                      }}
+                    />
+                  </g>
+
+                  {/* Center Pin */}
+                  <circle cx="140" cy="140" r="25" fill="#2a2a2a" />
+                  <circle
+                    cx="140"
+                    cy="140"
+                    r="15"
+                    fill="#1a1a1a"
+                    stroke="#444"
+                    strokeWidth="1"
+                  />
+                </svg>
                 <div
-                  className="speed-meter-niddle-container"
-                  style={{ transform: `rotate(${scaleValue(speedNiddle)}deg)` }}
+                  style={{
+                    zIndex: 99,
+                    position: 'absolute',
+                    top: '75%',
+                    left: '50%',
+                    transform: 'translate(-50%, -75%)',
+                  }}
                 >
                   <div
-                    className="speed-meter-niddle"
-                    style={{ backgroundColor: getNIddleColor(speedNiddle) }}
-                  />
-                  <div className="speed-meter-niddle-cover" />
+                    style={{
+                      fontSize: '20px',
+                      fontWeight: 'bold',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    {speedNiddle} kmph
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '20px',
+                      fontWeight: 'bold',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    {distance.toFixed(2)} km
+                  </div>
                 </div>
-                <div className="digital-font speed-meter-niddle-cover-number">
-                  {speedNiddle}
-                </div>
-                <div className="speed-meter-niddle-cover-number-unit">kmph</div>
               </div>
               <div
                 className="direction-container"
@@ -198,15 +316,3 @@ const Speedo = () => {
 };
 
 export default Speedo;
-
-const NumberLines = ({ speed }) => {
-  const lines = 9;
-
-  return Array.from({ length: lines }, (_, i) => (
-    <div
-      key={`number-line-${i + 1}`}
-      className={`numbers-line meter-numbers-${i + 1}`}
-      style={{ borderColor: getNIddleColor(speed) }}
-    />
-  ));
-};
