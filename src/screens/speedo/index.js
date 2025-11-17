@@ -1,23 +1,22 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AnimatedClock from '../../components/animated-clock';
 import BackButton from '../../components/back-button';
 import './speedo.css';
-
-const getNIddleColor = (speed) => {
-  if (speed > 50) return '#ff4a4a';
-  if (speed > 40) return '#ffcf4f';
-  return 'white';
-};
 
 const Speedo = () => {
   const [speedNiddle, setSpeedNiddle] = useState(0);
   const [maxSpeed, setMaxSpeed] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [distance, setDistance] = useState(0);
 
   const [position, setPosition] = useState(null);
   const [error, setError] = useState(null);
   const [showCampass, setShowCampass] = useState(false);
+
+  const getNIddleColor = (speed) => {
+    if (speed < 40) return 'white';
+    else if (speed >= 40 && speed < 50) return '#ffcf4f';
+    else if (speed >= 50) return '#ff4a4a';
+  };
 
   useEffect(() => {
     setTimeout(() => setSpeedNiddle(100), 400);
@@ -49,19 +48,6 @@ const Speedo = () => {
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const calculateDistance = useCallback((speed) => {
-    if (speed === 0) return;
-    setDistance((prevDistance) => prevDistance + speed / 3600);
-  }, []);
-
-  useEffect(() => {
-    const distanceInterval = setInterval(() => {
-      calculateDistance(speedNiddle);
-    }, 1000);
-
-    return () => clearInterval(distanceInterval);
-  }, [calculateDistance, speedNiddle]);
 
   const normaliseToFixed = (num) => {
     if (!num) return 0;
@@ -154,7 +140,7 @@ const Speedo = () => {
                       <stop
                         offset="100%"
                         style={{
-                          stopColor: `${getNIddleColor(speedNiddle)}80`,
+                          stopColor: 'black',
                           stopOpacity: 1,
                         }}
                       />
@@ -172,11 +158,11 @@ const Speedo = () => {
                     >
                       <stop
                         offset="0%"
-                        style={{ stopColor: '#ffffff4b', stopOpacity: 1 }}
+                        style={{ stopColor: '#ffffff2d', stopOpacity: 1 }}
                       />
                       <stop
                         offset="100%"
-                        style={{ stopColor: '#000000ff', stopOpacity: 1 }}
+                        style={{ stopColor: '#00000079', stopOpacity: 1 }}
                       />
                     </linearGradient>
                   </defs>
@@ -206,7 +192,7 @@ const Speedo = () => {
                       transition: 'transform 0.5s ease',
                       transformOrigin: '140px 140px',
                       transform: `rotate(${
-                        -180 + (Math.min(maxSpeed, 200) / 200) * 180
+                        -180 + (Math.min(maxSpeed, 100) / 100) * 180
                       }deg)`,
                     }}
                   >
@@ -234,29 +220,17 @@ const Speedo = () => {
                   style={{
                     zIndex: 99,
                     position: 'absolute',
-                    top: '75%',
+                    top: '70%',
                     left: '50%',
                     transform: 'translate(-50%, -75%)',
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    fontFamily: 'monospace',
                   }}
                 >
-                  <div
-                    style={{
-                      fontSize: '20px',
-                      fontWeight: 'bold',
-                      fontFamily: 'monospace',
-                    }}
-                  >
-                    {speedNiddle} kmph
-                  </div>
-                  <div
-                    style={{
-                      fontSize: '20px',
-                      fontWeight: 'bold',
-                      fontFamily: 'monospace',
-                    }}
-                  >
-                    {distance.toFixed(2)} km
-                  </div>
+                  <span>{speedNiddle}|</span>
+                  <span style={{ color: 'gray' }}>{maxSpeed}</span>
+                  <span> kmph</span>
                 </div>
               </div>
               <div
