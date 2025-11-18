@@ -21,6 +21,7 @@ const Speedo = () => {
   useEffect(() => {
     setTimeout(() => setSpeedNiddle(100), 400);
     setTimeout(() => setSpeedNiddle(0), 990);
+    localStorage.removeItem('speed-log');
 
     const watchId = navigator.geolocation.watchPosition(
       showPosition,
@@ -66,7 +67,48 @@ const Speedo = () => {
       const currentSpeed = normalise(_position.coords.speed * 3.6);
       return currentSpeed > prevMaxSpeed ? currentSpeed : prevMaxSpeed;
     });
+    const currentSpeed = normalise(_position.coords.speed * 3.6);
+    logDistanceToFile(normalise(currentSpeed));
   }
+
+  function logDistanceToFile(distance) {
+    const timestamp = new Date().toISOString();
+    const row = `${timestamp},${distance}\n`;
+
+    let csv = localStorage.getItem('speed-log');
+
+    if (!csv) {
+      csv = 'timestamp,speed\n';
+    }
+
+    csv += row;
+    localStorage.setItem('speed-log', csv);
+
+    // console.log('Logged CSV:', row.trim());
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+
+    let link = document.getElementById('download-log-link');
+    if (!link) {
+      link = document.createElement('a');
+      link.id = 'download-log-link';
+      link.className = 'download-link';
+      link.innerHTML = 'Download Log';
+      const rootElement = document.getElementById('download-btn-container');
+      rootElement.appendChild(link);
+    }
+
+    link.href = url;
+    const now = new Date();
+    const dateTime = now.toISOString().replace(/[:.]/g, '-').slice(0, -5);
+    link.download = `speed-log-${dateTime}.csv`;
+  }
+
+  const clearLogFile = () => {
+    localStorage.removeItem('speed-log');
+    setMaxSpeed(0);
+  };
 
   function showError(_error) {
     setPosition(null);
@@ -285,6 +327,17 @@ const Speedo = () => {
         </div>
       </div>
       {error && <div className="speedo-error-container">Error: {error}</div>}
+      <div id="download-btn-container"></div>
+      <button
+        className="clear-log-button"
+        onClick={() => {
+          if (window.confirm('Clear distance log?')) {
+            clearLogFile();
+          }
+        }}
+      >
+        Clear Distance Log
+      </button>
     </>
   );
 };

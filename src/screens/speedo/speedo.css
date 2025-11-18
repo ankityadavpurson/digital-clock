@@ -122,3 +122,27 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.download-link {
+  padding: 8px 16px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+  margin: auto;
+  margin-top: 16px;
+}
+
+.clear-log-button {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
