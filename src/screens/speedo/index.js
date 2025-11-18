@@ -12,7 +12,7 @@ const Speedo = () => {
   const [error, setError] = useState(null);
   const [showCampass, setShowCampass] = useState(false);
 
-  const getNIddleColor = (speed) => {
+  const getNeedleColor = (speed) => {
     if (speed < 40) return 'white';
     else if (speed >= 40 && speed < 50) return '#ffcf4f';
     else if (speed >= 50) return '#ff4a4a';
@@ -157,7 +157,7 @@ const Speedo = () => {
                         y2={y2}
                         strokeWidth="4"
                         strokeLinecap="round"
-                        stroke={getNIddleColor(speedNiddle)}
+                        stroke={getNeedleColor(speedNiddle)}
                         style={{ transition: 'transform 0.5s ease' }}
                       />
                     );
@@ -175,16 +175,13 @@ const Speedo = () => {
                       <stop
                         offset="0%"
                         style={{
-                          stopColor: getNIddleColor(speedNiddle),
+                          stopColor: getNeedleColor(speedNiddle),
                           stopOpacity: 1,
                         }}
                       />
                       <stop
                         offset="100%"
-                        style={{
-                          stopColor: 'black',
-                          stopOpacity: 1,
-                        }}
+                        style={{ stopColor: 'gray', stopOpacity: 1 }}
                       />
                     </linearGradient>
                   </defs>
@@ -204,7 +201,7 @@ const Speedo = () => {
                       />
                       <stop
                         offset="100%"
-                        style={{ stopColor: '#00000079', stopOpacity: 1 }}
+                        style={{ stopColor: '#2f2f2fff', stopOpacity: 1 }}
                       />
                     </linearGradient>
                   </defs>
@@ -220,7 +217,7 @@ const Speedo = () => {
                     }}
                   >
                     <polygon
-                      points="140,140 135,145 240,140 135,135"
+                      points="190,140 135,145 260,140 135,135"
                       fill="url(#needleGradient)"
                       style={{
                         filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
@@ -239,7 +236,7 @@ const Speedo = () => {
                     }}
                   >
                     <polygon
-                      points="140,140 135,145 240,140 135,135"
+                      points="190,140 135,145 260,140 135,135"
                       fill="url(#maxNeedleGradient)"
                       style={{
                         filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
@@ -262,7 +259,7 @@ const Speedo = () => {
                   style={{
                     zIndex: 99,
                     position: 'absolute',
-                    top: '70%',
+                    top: '32%',
                     left: '50%',
                     transform: 'translate(-50%, -75%)',
                     fontSize: '20px',
@@ -270,9 +267,10 @@ const Speedo = () => {
                     fontFamily: 'monospace',
                   }}
                 >
-                  <span>{speedNiddle}|</span>
-                  <span style={{ color: 'gray' }}>{maxSpeed}</span>
-                  <span> kmph</span>
+                  <div>{speedNiddle}</div>
+                  <div style={{ color: 'gray', fontSize: 12 }}>
+                    {maxSpeed} kmph
+                  </div>
                 </div>
               </div>
               <div
