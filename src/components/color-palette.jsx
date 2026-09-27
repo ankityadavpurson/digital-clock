@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { basePixelOnColor } from '../constant/color';
+import { useContext, useEffect, useState } from 'react';
+import { basePixelOnColor, blueColor, grayColor, redColor, whiteColor, yellowColor } from '../constant/color';
 import ColorContext from '../store/color-context';
 import ColorButton from './color-button';
 
 const COLORS = [
-  '#ffffff',
-  '#808080',
-  '#ff0000',
-  '#0000ff',
-  '#ffff00',
+  whiteColor,
+  grayColor,
+  redColor,
+  blueColor,
+  yellowColor,
   basePixelOnColor,
 ];
 

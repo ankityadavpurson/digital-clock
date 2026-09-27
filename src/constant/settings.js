@@ -1,0 +1,1 @@
+export const dimmingTimeout = 10000;
