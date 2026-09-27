@@ -1,3 +1,3 @@
 export const basePixelOnColor = '#00ff00';
-export const basePixelOffColor = 'rgb(50 50 50 / 50%)';
-export const labelColor = 'rgb(110, 110, 110)';
+export const basePixelOffColor = '#32323280';
+export const labelColor = '#6e6e6e';

@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
-import { basePixelOffColor } from '../constant/color';
+import { useContext } from 'react';
 import ColorContext from '../store/color-context';
 
 const Pixel = ({ size, power }) => {
   const colorCtx = useContext(ColorContext);
-  const pixelColor = power ? colorCtx.pixelColor : basePixelOffColor;
+  const pixelColor = power ? colorCtx.pixelColor : colorCtx.pixelOffColor;
   const height = size / 2;
   const width = size;
   return (
