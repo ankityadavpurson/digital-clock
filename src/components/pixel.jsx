@@ -6,39 +6,22 @@ const Pixel = ({ size, power }) => {
   const pixelColor = power ? colorCtx.pixelColor : colorCtx.pixelOffColor;
   const height = size / 2;
   const width = size;
+  const totalWidth = width + height;
+
   return (
     <div style={{ margin: '0px' }}>
-      <div
+      <svg
         className="transition"
-        style={{
-          width: '0',
-          height: '0',
-          borderTop: `${height / 2}px solid transparent`,
-          borderBottom: `${height / 2}px solid transparent`,
-          borderRight: `${height / 2}px solid ${pixelColor}`,
-          display: 'inline-block',
-        }}
-      ></div>
-      <div
-        className="transition"
-        style={{
-          height: `${height}px`,
-          width: `${width}px`,
-          display: 'inline-block',
-          backgroundColor: pixelColor,
-        }}
-      ></div>
-      <div
-        className="transition"
-        style={{
-          width: '0',
-          height: '0',
-          borderTop: `${height / 2}px solid transparent`,
-          borderBottom: `${height / 2}px solid transparent`,
-          borderLeft: `${height / 2}px solid ${pixelColor}`,
-          display: 'inline-block',
-        }}
-      ></div>
+        width={totalWidth}
+        height={height}
+        viewBox={`0 0 ${totalWidth} ${height}`}
+        aria-hidden="true"
+      >
+        <polygon
+          points={`0,${height / 2} ${height / 2},0 ${height / 2 + width},0 ${totalWidth},${height / 2} ${height / 2 + width},${height} ${height / 2},${height}`}
+          fill={pixelColor}
+        />
+      </svg>
     </div>
   );
 };
